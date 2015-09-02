@@ -5,7 +5,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js'
 
-    -sign_package = $wechat_client.get_jssign_package(request.url) 
+    -sign_package = $test_wechat_client.get_jssign_package(request.url) 
     :javascript
       var $appId = '#{sign_package['appId']}';
       var $timestamp = '#{sign_package['timestamp']}';
