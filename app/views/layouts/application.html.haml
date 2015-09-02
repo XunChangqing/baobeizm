@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+%html
+  %head
+    -#%title= full_title(yield(:title))
+    %title= yield(:title)
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{:name => "viewport", :content=>"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"}
+    -#<!--[if lt IE 9]>
+      -#<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      -#</script>
+    -#<![endif]-->
+  -#%frameset
+    -#%frame{"src"=>"http://www.ifeng.com"}
+
+  %body
+    = render "layouts/header"
+
+    .container
+      = yield
+
+    = render "layouts/footer"
+    
+  
+

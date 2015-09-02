@@ -1,0 +1,40 @@
+%footer
+  -#-#.footer
+  -#-#<small>
+    -#-#The <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
+    -#-#by <a href="http://www.michaelhartl.com/">Michael Hartl</a>
+  -#-#</small>
+  -#.container
+    -#-#.center
+      -#-#%p= t('common.record_info')
+    -#%nav
+      -#%ul.nav.navbar-nav.navbar-right
+        -#-#%li= link_to t("common.about"), "#"
+        -#-#%li= link_to t("common.contact"), "#"
+        -#%li
+          -#%a{"data-toggle"=> 'modal', "data-target"=> '#aboutModal'}= t('common.about')
+        -#%li
+          -#%a{"data-toggle"=> 'modal', "data-target"=> '#contactModal'}= t('common.contact')
+
+
+-#-#%button{"data-toggle"=> 'modal', "data-target"=> '#aboutModal'}= t('common.about')
+-#.modal.fade#aboutModal{"aria-labelledby" => 'aboutModalLabel', :role => "dialog"}
+  -#.modal-dialog{:role => "document"}
+    -#.modal-content
+      -#.modal-header
+        -#%button.close{:type => "button", "data-dismiss" => "modal", "aria-label" => 'Close'}
+          -#%span{"aria-hidden" => 'true'} &times;
+        -#%h4= t("common.about_header")
+      -#.modal-body
+        -#%p= t('common.about_body')
+
+-#.modal.fade#contactModal{"aria-labelledby" => 'contactModalLabel', :role => "dialog"}
+  -#.modal-dialog{:role => "document"}
+    -#.modal-content
+      -#.modal-header
+        -#%button.close{:type => "button", "data-dismiss" => "modal", "aria-label" => 'Close'}
+          -#%span{"aria-hidden" => 'true'} &times;
+        -#%h4= t("common.contact_header")
+      -#.modal-body
+        -#%p= t('common.contact_body')
+

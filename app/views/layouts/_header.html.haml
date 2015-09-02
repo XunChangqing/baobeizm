@@ -1,0 +1,44 @@
+-#%header.navbar.navbar-inverse
+  -#.container
+    -#= link_to "GGL 我们的赛事", welcome_index_url, {id: "logo"}
+    -#%nav
+      -#%ul.nav.navbar-nav.navbar-right
+        -#-unless current_user
+          -#-#%li= link_to t("common.sign_up"), new_user_registration_url
+          -#%li= link_to t("common.log_in"), new_user_session_url
+        -#-if current_user
+          -#%li= link_to current_user.email, edit_user_registration_url
+          -#%li= link_to t("common.log_out"), destroy_user_session_path, method: :delete
+        -#-#%li= link_to t("common.help"), "#"
+  -#-#-if controller_name == "welcome"
+    -#-#.container
+      -#-#-#%div{"role"=>"tabpanel"}
+      -#-#%ul#myTab.nav.nav-tabs{"role"=>"tablist"}
+        -#-#%li.active{:role=>"presentation"}
+          -#-#= link_to t("common.home"), "#home", {role: 'tab', "aria-controls"=>"home", "data-toggle"=> 'tab'}
+        -#-#%li{:role=>"presentation"}
+          -#-#=link_to t("user.profile"), "#profile", {role: 'tab', "aria-controls"=>"profile", "data-toggle"=>'tab'}
+        -#-#-if current_user.is? 'user.user_admin'
+          -#-#%li{:role=>"presentation"}
+            -#-#= link_to t("user.admin"), "#useradmin", {role: 'tab', "aria-controls"=>"useradmin", "data-toggle"=>"tab"}
+  -#.container
+    -#-#%div{"role"=>"tabpanel"}
+    -#%ul#myTab.nav.nav-tabs{"role"=>"tablist"}
+      -#%li{:class=>("active" if controller_name == "welcome"), :role=>"presentation"}
+        -#= link_to t("common.home"), welcome_index_url, {role: 'tab'}
+      -#-#%li{:class=>("active" if controller_name == "results"), :role=>"presentation"}
+        -#-#= link_to t("common.results"), results_url, {role: 'tab'}
+      -#-#-if can? :manage, Match
+      -#%li{:class=>("active" if controller_name == "matches"), :role=>"presentation"}
+        -#= link_to t("common.matches"), matches_url, {role: 'tab'}
+      -#%li{:class=>("active" if controller_name == "events"), :role=>"presentation"}
+        -#= link_to t("common.events"), events_url, {role: 'tab'}
+      -#-#-if can? :manage, Comment
+        -#-#%li{:class=>("active" if controller_name == "comments"), :role=>"presentation"}
+          -#-#= link_to t("common.comments"), comments_url, {role: 'tab'}
+      -#-if can? :manage, LiveRoom
+        -#%li{:class=>("active" if controller_name == "live_rooms"), :role=>"presentation"}
+          -#= link_to t("common.live_room"), live_rooms_url, {role: 'tab'}
+      -#-if can? :manage, User
+        -#%li{:class=>("active" if controller_name == "users"), :role=>"presentation"}
+          -#= link_to t("user.list"), users_url, {role: 'tab'}
