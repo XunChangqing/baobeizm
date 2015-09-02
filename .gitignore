@@ -15,6 +15,7 @@ config/database.yml
 config/secrets.yml
 config/wechat.yml
 config/trollwiz.yml
+config/*.yml
 *.swp
 
 # Ignore all logfiles and tempfiles.
