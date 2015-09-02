@@ -1,0 +1,39 @@
+%p 姓名：#{@requester.name}
+
+%button.btn.btn-info.btn-lg{"type"=> "button", "data-toggle"=>"modal", "data-target"=>"#myModal"}  投票
+
+.modal.fade#myModal{"role"=>"dialog"}
+  .modal-dialog
+    .modal-content
+      -#.modal-header
+        -#%h4.modal-title modal header
+      .modal-body
+        -#=form_for @nresponder, url, remote: true, html: {"data-type" => "json"} do |f|
+          -#.form-group
+            -#-#= f.text_field :content, class: 'form-control', placeholder: t('comment.content')
+            -#= f.text_area :content, class: 'form-control', placeholder: "姓名"
+          -#.actions
+            -#= f.submit t('comment.submit'), class: "btn btn-primary"
+        %form{"action"=>"/test_requesters/vote", "method"=>"post"}
+          %p 姓名：
+          %input{type: "text", name: "name"}
+          -#%p ID：
+          %input{type: "hidden", name: "id", value: params[:id]}
+          %input{type: "submit", value: '投票'}
+      -#.modal-footer
+        -#%button.btn.btn-default{"type"=>"button", "data-dismiss"=>"modal"}
+          -#close
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th= '投票人姓名'
+  %tbody
+    - @responders.each do |res|
+      %tr
+        %td
+          =res.name
+
+
+%p 总票数: #{@responders.count}
+

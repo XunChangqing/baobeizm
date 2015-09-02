@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 %html
   %head
-    -#%title= full_title(yield(:title))
     %title= yield(:title)
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js'
+
+    -sign_package = $wechat_client.get_jssign_package(request.url) 
+    :javascript
+      var $appId = '#{sign_package['appId']}';
+      var $timestamp = '#{sign_package['timestamp']}';
+      var $nonceStr = '#{sign_package['nonceStr']}';
+      var $signature = '#{sign_package['signature']}';
+
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     %meta{:name => "viewport", :content=>"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"}
-    -#<!--[if lt IE 9]>
-      -#<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
-      -#</script>
-    -#<![endif]-->
-  -#%frameset
-    -#%frame{"src"=>"http://www.ifeng.com"}
+
 
   %body
     = render "layouts/header"
@@ -21,6 +24,6 @@
       = yield
 
     = render "layouts/footer"
-    
-  
+
+
 
