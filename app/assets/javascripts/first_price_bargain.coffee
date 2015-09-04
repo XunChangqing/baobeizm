@@ -7,5 +7,5 @@ wx.config(
   timestamp: $timestamp
   nonceStr: $nonceStr
   signature: $signature
-  jsApiList: ['showOptionMenu'] )
+  jsApiList: ['showOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage'] )
 wx.ready( wx.showOptionMenu())

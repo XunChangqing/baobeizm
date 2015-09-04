@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   #get 'test_requesters' => 'test_requesters#index'
   #post 'test_requesters/vote' => 'test_requesters#vote'
   
-  get 'first_price_bargain/show' => 'first_price_bargain#show'
+  get 'first_price_bargain/entrance' => 'first_price_bargain#entrance'
+  get 'first_price_bargain/show' => 'first_price_bargain#show', as: :first_price_bargain_show
+  post 'first_price_bargain/create' => 'first_price_bargain#create', as: :first_price_bargain_create
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
