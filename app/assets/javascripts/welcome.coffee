@@ -1,11 +1,1 @@
-wx.config(
-  debug: false
-  appId: $appId
-  timestamp: $timestamp
-  nonceStr: $nonceStr
-  signature: $signature
-  jsApiList: ['showOptionMenu'] )
-wx.ready( wx.showOptionMenu())
-#wx.error(-> alert('no'))
-#wx.error(-> alert('no'))
-#alert('hello')
+alert("welcome coffee")

@@ -1,0 +1,1 @@
+(function(){wx.config({debug:!1,appId:$appId,timestamp:$timestamp,nonceStr:$nonceStr,signature:$signature,jsApiList:["showOptionMenu"]}),wx.ready(wx.showOptionMenu())}).call(this);

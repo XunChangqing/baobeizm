@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title= yield(:title)
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'first_price_bargain', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js'
+
+    -sign_package = $first_wechat_client.get_jssign_package(request.url) 
+    :javascript
+      var $appId = '#{sign_package['appId']}';
+      var $timestamp = '#{sign_package['timestamp']}';
+      var $nonceStr = '#{sign_package['nonceStr']}';
+      var $signature = '#{sign_package['signature']}';
+
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'first_price_bargain', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{:name => "viewport", :content=>"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"}
+
+
+  %body
+    = render "layouts/header"
+
+    .container
+      = yield
+
+    = render "layouts/footer"
+
+
+
