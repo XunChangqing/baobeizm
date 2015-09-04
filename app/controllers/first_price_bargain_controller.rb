@@ -2,13 +2,6 @@ class FirstPriceBargainController < ApplicationController
   before_action :auth_wechat, except: :entrance
   layout 'first_price_bargain'
 
-  def entrance
-    sns_info = wechat_client.get_oauth_access_token(params[:code])
-    user_info = wechat_client.get_oauth_userinfo(sns_info.result['openid'], sns_info.result['access_token'])
-    session[:user_info] = user_info.result
-    redirect_to first_price_bargain_show_path
-  end
-
   def show
     #Rails.logger.info sns_info.result['openid']
     #Rails.logger.info sns_info.result['access_token']
@@ -24,11 +17,18 @@ class FirstPriceBargainController < ApplicationController
   def current_user
     session[:user_info]
   end
+
   def auth_wechat
     Rails.logger.info session[:user_info].inspect
     if(session[:user_info] == nil)
-      Rails.logger.info 'redirect to' + wechat_client.authorize_url(first_price_bargain_entrance_url, 'snsapi_userinfo')
-      redirect_to wechat_client.authorize_url(first_price_bargain_entrance_url, 'snsapi_userinfo')
+      if(params[:code] == nil)
+        Rails.logger.info 'redirect to' + wechat_client.authorize_url(request.url, 'snsapi_userinfo')
+        redirect_to wechat_client.authorize_url(request.url, 'snsapi_userinfo')
+      else
+        sns_info = wechat_client.get_oauth_access_token(params[:code])
+        user_info = wechat_client.get_oauth_userinfo(sns_info.result['openid'], sns_info.result['access_token'])
+        session[:user_info] = user_info.result
+      end
     end
   end
   def wechat_client
