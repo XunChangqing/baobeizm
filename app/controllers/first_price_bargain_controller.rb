@@ -1,13 +1,11 @@
 class FirstPriceBargainController < ApplicationController
-  before_action :auth_wechat, except: :entrance
+  before_action :auth_wechat
   layout 'first_price_bargain'
 
   def show
-    #Rails.logger.info sns_info.result['openid']
-    #Rails.logger.info sns_info.result['access_token']
-    #user_info = $first_wechat_client.get_oauth_userinfo(sns_info.result['openid'], sns_info.result['access_token'])
-    #Rails.logger.info user_info.inspect
     @current_user = current_user
+    #@current_user['nickname']
+    #@current_user['openid']
   end
 
   def create
@@ -19,10 +17,10 @@ class FirstPriceBargainController < ApplicationController
   end
 
   def auth_wechat
-    Rails.logger.info session[:user_info].inspect
+    #Rails.logger.info session[:user_info].inspect
     if(session[:user_info] == nil)
       if(params[:code] == nil)
-        Rails.logger.info 'redirect to' + wechat_client.authorize_url(request.url, 'snsapi_userinfo')
+        #Rails.logger.info 'redirect to' + wechat_client.authorize_url(request.url, 'snsapi_userinfo')
         redirect_to wechat_client.authorize_url(request.url, 'snsapi_userinfo')
       else
         sns_info = wechat_client.get_oauth_access_token(params[:code])

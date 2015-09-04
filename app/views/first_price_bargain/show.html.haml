@@ -1,14 +1,14 @@
-%p.text-center= @current_user.inspect
+%p.text-center 昵称
+%p.text-center= @current_user['nickname']
 -#.panel-footer.row
 .row
   .col-xs-6.text-center
-    %button.btn.btn-primary.btn-lg{type: "button"}
-      default
+    %button.btn.btn-info.btn-lg{"type"=> "button", "data-toggle"=>"modal", "data-target"=>"#myModal"}  报名
   .col-xs-6.text-center
     %button.btn.btn-primary.btn-lg{type: "button"}
-      default
+      砍价
+      
 
-%button.btn.btn-info.btn-lg{"type"=> "button", "data-toggle"=>"modal", "data-target"=>"#myModal"}  投票
 
 .modal.fade#myModal{"role"=>"dialog"}
   .modal-dialog
