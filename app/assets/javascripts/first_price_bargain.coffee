@@ -1,15 +1,19 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-#wx.config(
-  #debug: false
-  #appId: $appId
-  #timestamp: $timestamp
-  #nonceStr: $nonceStr
-  #signature: $signature
-  #jsApiList: ['showOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage'] )
+wx.config(
+  debug: false
+  appId: $appId
+  timestamp: $timestamp
+  nonceStr: $nonceStr
+  signature: $signature
+  jsApiList: ['showOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage'] )
 
-#wx.ready( wx.showOptionMenu())
+wx.ready ->
+  wx.showOptionMenu()
+  #imgUrl
+  wx.onMenuShareTimeline title: '搜房砍价'
+  wx.onMenuShareAppMessage title: '搜房砍价'
 
 #$('a#tab-list]').on('shown.bs.tab', ->
   #href = 

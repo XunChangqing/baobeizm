@@ -13,6 +13,10 @@ class FirstPriceBargainController < ApplicationController
         @has_vote = @current_joiner.first_price_voter.any?{ |voter| voter.openid == current_user['openid'] }
       end
     end
+    #to get right share url
+    if @current_joiner == nil and @myjoiner != nil
+      redirect_to action: 'show', openid: current_user['openid']
+    end
   end
 
   def join
