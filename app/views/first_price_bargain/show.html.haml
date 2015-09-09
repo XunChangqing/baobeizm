@@ -1,51 +1,129 @@
-%p.text-center 昵称
-%p.text-center= @current_user['nickname']
--#.panel-footer.row
-.row
-  .col-xs-6.text-center
-    %button.btn.btn-info.btn-lg{"type"=> "button", "data-toggle"=>"modal", "data-target"=>"#myModal"}  报名
-  .col-xs-6.text-center
-    %button.btn.btn-primary.btn-lg{type: "button"}
-      砍价
-      
+.firstprice-head
+  -if @current_joiner==nil or @current_joiner== @myjoiner
+    %h1.current-point 我的助力指数
+    -if @myjoiner
+      %h1.myrank= '我的排名:第'+@myjoiner.rank.to_s+"位"
+      -cpoint = @myjoiner.point
+      =render partial: 'point', locals: {tp: @myjoiner.point}
+      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btnadown.png'} 
+        %img{src: '/image/fpb/btnaup.png'} 
+        %h2 邀请好友
+    -else
+      %h1.myrank 我的排名：
+      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnbdown.png'} 
+        %img{src: '/image/fpb/btnbup.png'}
+        %h2 我也要抢
+        -cpoint = 0
+  -else
+    %h1.current-point 好友助力指数
+    %h1#friend-rank.myrank= '好友排名:第'+@current_joiner.rank.to_s+"位"
+    -#%h1.get-iphone-myrank 帮好友抢
+    -cpoint = @current_joiner.point
+    -if @has_vote
+      .custom-btn.home-left-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btnadown.png'} 
+        %img{src: '/image/fpb/btnaup.png'}
+        %h2 邀请好友
+    -else
+      #vote.custom-btn.home-left-btn{downimg: '/image/fpb/btnadown.png', openid: @current_joiner.openid} 
+        %img{src: '/image/fpb/btnaup.png'}
+        %h2 加油助力
+    -if @myjoiner
+      %a.custom-btn.home-right-btn{href: '#{/first_price_bargain/show?openid=@myjoiner.openid}', downimg: '/image/fpb/btnbdown.png'} 
+        %img{src: '/image/fpb/btnbup.png'}
+        %h2 查看自己
+    -else
+      .custom-btn.home-right-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnbdown.png'} 
+        %img{src: '/image/fpb/btnbup.png'}
+        %h2 我也要抢
+    
+  =render partial: 'point', locals: {tp: cpoint}
 
+  .modal.fade#joinModal{"role"=>"dialog"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          %p 参与抢iPhone 6S
+        .modal-body
+          %form{action: "#{first_price_bargain_join_path}", method: "post"}
+            =phone_field "user", "phone", class: 'form-control', 'placeholder'=> '手机号码'
+            %input.form-control{type: "submit", value: '我也要抢iPhone!'}
 
-.modal.fade#myModal{"role"=>"dialog"}
-  .modal-dialog
-    .modal-content
-      -#.modal-header
-        -#%h4.modal-title modal header
-      .modal-body
-        -#=form_for @nresponder, url, remote: true, html: {"data-type" => "json"} do |f|
-          -#.form-group
-            -#-#= f.text_field :content, class: 'form-control', placeholder: t('comment.content')
-            -#= f.text_area :content, class: 'form-control', placeholder: "姓名"
-          -#.actions
-            -#= f.submit t('comment.submit'), class: "btn btn-primary"
-        -#%form{action: action"/test_requesters/vote", method: "post"}
-        -#%form{action: "#{url_for action: "create"}", method: "post"}
-        %form{action: "#{first_price_bargain_create_path}", method: "post"}
-          .form-group
-            %p 姓名：
-            %input.form-control{type: "text", name: "name"}
-          .form-group
-            =phone_field "user", "phone", class: 'form-control'
-          -#%p ID：
-          %input{type: "hidden", name: "id", value: params[:id]}
-          %input.form-control{type: "submit", value: '投票'}
-      -#.modal-footer
-        -#%button.btn.btn-default{"type"=>"button", "data-dismiss"=>"modal"}
-          -#close
+  .modal.fade#inviteModal{"role"=>"dialog"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          %p 参与抢iPhone 6S
+        .modal-body
+          %img.img-responsive{src: '/image/fpb/invitea.png'}
 
--#%table.table.table-hover
-  -#%thead
-    -#%tr
-      -#%th= '投票人姓名'
-  -#%tbody
-    -#- @responders.each do |res|
-      -#%tr
-        -#%td
-          -#=res.name
-
-
--#%p 总票数: #{@responders.count}
+.firstprice-body
+  %ul.nav.nav-tabs.nav-justified
+    %li.active
+      =link_to "排行榜", "#tab-list", html_options = { "data-toggle" => "tab" }
+    %li
+      =link_to "规则和奖品", "#tab-rule", html_options = { "data-toggle" => "tab" }
+    %li
+      -if @current_joiner
+        =link_to  "给力好友", "#tab-voters", html_options = { "joiner" => @current_joiner['openid'],"data-toggle" => "tab" }
+      -else
+        =link_to "给力好友", "#tab-voters", html_options = { "data-toggle" => "tab" }
+  
+  .tab-content
+    .tab-pane.active#tab-list
+      .joiners-infinite-table
+        %table.table.table-striped
+          %thead
+            %tr
+              %th 排名
+              %th 昵称
+              %th 人气指数
+              %th 头像
+          %tbody
+            -#=render partial: 'joiners', locals:{page_offset: 1}
+        %p.joiners-pagination
+          -#=link_to '', {remote: true, action: 'show_joiners', page: 1}, {rel: 'next'}
+          -#-if not @joiners.last_page?
+            -#=link_to '', {remote: true, action: 'show_joiners', page: @joiner.next_page}, {rel: 'next'}
+    .tab-pane#tab-rule
+      %table.table.table-striped
+        %tbody
+          %tr
+            %td
+              %p.rule-head 活动时间:
+              %p.rule-body 2015/09/13 - 2015/09/29
+          %tr
+            %td
+              %p.rule-head 活动时间:
+              %p.rule-body 2015/09/13 - 2015/09/29
+          %tr
+            %td
+              %p.rule-head 活动时间:
+              %p.rule-body 2015/09/13 - 2015/09/29
+          %tr
+            %td
+              %p.rule-head 活动时间:
+              %p.rule-body 2015/09/13 - 2015/09/29
+          %tr
+            %td
+              %p.rule-head 活动时间:
+              %p.rule-body 2015/09/13 - 2015/09/29
+          %tr
+            %td
+              %p.rule-head 活动时间:
+              %p.rule-body 2015/09/13 - 2015/09/29
+    .tab-pane#tab-voters
+      -#-if @current_joiner
+      .voters-infinite-table{openid: @current_joiner.openid}
+        %table.table
+          %thead
+            %tr
+              %th 头像 
+              %th 昵称
+              %th 给力点数
+          %tbody
+            -#=render partial: 'voters', locals:{page_offset: 1}
+        %p.voters-pagination
+          -#=link_to '下一页', {remote: true, action: 'show_voters', page: 1, openid: @current_joiner.openid}, {rel: 'next'}
+  

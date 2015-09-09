@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   #post 'test_requesters/vote' => 'test_requesters#vote'
   
   get 'first_price_bargain/show' => 'first_price_bargain#show', as: :first_price_bargain_show
-  post 'first_price_bargain/create' => 'first_price_bargain#create', as: :first_price_bargain_create
+  get 'first_price_bargain/show_joiners' => 'first_price_bargain#show_joiners', as: :fpb_joiner
+  get 'first_price_bargain/show_voters' => 'first_price_bargain#show_voters', as: :fpb_voter
+  post 'first_price_bargain/join' => 'first_price_bargain#join', as: :first_price_bargain_join
+  post 'first_price_bargain/vote' => 'first_price_bargain#vote', as: :first_price_bargain_vote
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

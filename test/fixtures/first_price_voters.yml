@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nickname: MyString
+  heading_url: MyString
+  openid: MyString
+  first_price_joiner_id: 
+
+two:
+  nickname: MyString
+  heading_url: MyString
+  openid: MyString
+  first_price_joiner_id: 

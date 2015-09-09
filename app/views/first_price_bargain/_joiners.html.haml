@@ -1,0 +1,16 @@
+-@joiners.each_with_index do |joiner, index|
+  %tr
+    %td
+      -#= index+page_offset
+      -if index+page_offset == 1
+        %img{src: '/system/first.png'}
+      -if index+page_offset == 2
+        %img{src: '/system/second.png'}
+      -if index+page_offset == 3
+        %img{src: '/system/third.png'}
+      = index+page_offset if index+page_offset>3
+      
+
+    %td= joiner.nickname
+    %td= joiner.point
+    %td= image_tag(joiner.heading_url, alt: "没有头像")

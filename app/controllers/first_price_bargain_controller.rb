@@ -1,19 +1,77 @@
 class FirstPriceBargainController < ApplicationController
   before_action :auth_wechat
+  #before_action :current_user
   layout 'first_price_bargain'
 
   def show
-    @current_user = current_user
-    #@current_user['nickname']
-    #@current_user['openid']
+    @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page
+    @myjoiner = FirstPriceJoiner.find_by_openid(current_user['openid'])
+    #params[:openid]
+    if(params[:openid])
+      @current_joiner = FirstPriceJoiner.find_by_openid params[:openid]
+      if @current_joiner
+        @voters = @current_joiner.first_price_voter.order(:created_at).page if @current_joiner
+        @has_vote = @current_joiner.first_price_voter.any?{ |voter| voter.openid == current_user['openid'] }
+      end
+    end
   end
 
-  def create
+  def join
+    @joiner = FirstPriceJoiner.find_by_openid current_user['openid']
+    if(! @joiner)
+      @joiner = FirstPriceJoiner.new
+      @joiner.openid = current_user['openid']
+      @joiner.heading_url = current_user['heading_url']
+      @joiner.phone_number = params[:user][:phone]
+      @joiner.point = 0
+      @joiner.nickname = current_user['nickname']
+      @joiner.save
+    end
+    redirect_to action: 'show', openid: current_user['openid']
+  end
+
+  def vote
+    point_per = 5
+    @voter = FirstPriceVoter.new
+    @voter.openid = current_user['openid']
+    @voter.nickname = current_user['nickname']
+    @voter.heading_url = current_user['heading_url']
+    @voter.first_price_joiner = FirstPriceJoiner.find_by_openid params[:openid]
+    @voter.first_price_joiner.with_lock do
+      @voter.first_price_joiner.point += point_per
+      @voter.first_price_joiner.save!
+    end
+    if @voter.save
+      render json: {point: @voter.first_price_joiner.point, rank: @voter.first_price_joiner.rank}
+    else
+      render json: {error: 1}
+    end
+  end
+
+  def show_joiners
+    @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page(params[:page])
+    #@joiners = FirstPriceJoiner.page(params[:page])
+    if @joiners
+      @page_offset = (@joiners.current_page-1)*25+1
+    end
+  end
+
+  def show_voters
+    @current_joiner = FirstPriceJoiner.find_by_openid(params['openid'])
+    #byebug
+    if @current_joiner
+      @voters = @current_joiner.first_price_voter.order(:created_at).page(params[:page])
+    end
   end
 
   private
   def current_user
-    session[:user_info]
+    user = {}
+    user['nickname'] = 'other'
+    user['openid'] = 'xvsdf065ys980880'
+    user['heading_url'] = 'http://www.ifeng.com/xyz.jpg'
+    user
+    #session[:user_info]
   end
 
   def auth_wechat

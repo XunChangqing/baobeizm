@@ -1,0 +1,179 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.weixin-container
+{
+  width: 750px;
+  margin: 0 auto;
+}
+
+.firstprice-head{
+  position: relative;
+  width: 750px;
+  height: 1186px;
+  background: url('/image/fpb/firstpriceback.png');
+}
+
+.firstprice-body{
+  padding: 1%;
+  width: 750px;
+  background: #901919;
+}
+
+@media (min-width: 0px) {
+  .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+}
+
+
+.current-point{
+  position: absolute;
+  top: 440px;
+  left: 261px; 
+  color: yellow;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+@mixin current-point-num($left-pos) {
+  position: absolute;
+  top: 515px;
+  left: $left-pos; 
+  font-size: 1300%;
+  color: red;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.point{
+  #p1{
+    @include current-point-num(120px);
+  }
+  #p2{
+    @include current-point-num(261px);
+  }
+  #p3{
+    @include current-point-num(402px);
+  }
+  #p4{
+    @include current-point-num(543px);
+  }
+}
+
+.myrank{
+  position: absolute;
+  top: 760px;
+  left: 261px;
+  font-size: 30px;
+  color: yellow;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+@mixin home-btn($left-pos)
+{
+  img{
+    width: 220px;
+    position: absolute;
+    top: 855px;
+    left: $left-pos;
+  }
+  h2{
+    position: absolute;
+    top: 870px;
+    font-size: 200%;
+    color: yellow;
+    left: $left-pos+50px;
+  }
+}
+
+.home-left-btn
+{
+  @include home-btn(120px);
+}
+.home-right-btn
+{
+  @include home-btn(420px);
+}
+.home-middle-btn
+{
+  @include home-btn(270px);
+}
+
+.nav{
+  li.active{
+    a{
+      background:#F4B428;
+      color: red;
+      font-size: 250%;
+    }
+  }
+  li{
+    a{
+      background-color:#c32222;
+      color: yellow;
+      font-size: 250%;
+    }
+  }
+}
+
+.table{
+  background-color: #CA2323;
+  thead, tbody{
+    tr{
+      th,td{
+        background-color: #CA2323;
+        color: #FCF24E;
+        font-size: 200%;
+        text-align: center;
+      }
+      td{
+        vertical-align: middle;
+        &:nth-child(1)
+        {
+          font-size: 400%;
+        }
+        p.rule-head{
+          font-size: 50%;
+          text-align: left;
+        }
+        p.rule-body{
+          font-size: 50%;
+          color: white;
+          text-align: left;
+        }
+      }
+    }
+  }
+  tbody
+  {
+    tr{
+      height: 124px;
+    }
+  }
+}
+
+.table-striped
+{
+  tbody{
+    tr{
+      &:nth-child(odd){
+        td{
+          background-color: #B72020;
+        }
+      }
+    }
+  }
+}
+
+.modal-header, .modal-body{
+  background-color: #B72020;
+  color: yellow;
+  font-size: 400%;
+}
+
+.form-control
+{
+  font-size: 100%;
+  height: 150%;
+}
+
