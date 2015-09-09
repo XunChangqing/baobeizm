@@ -20,7 +20,7 @@ class FirstPriceBargainController < ApplicationController
     if(! @joiner)
       @joiner = FirstPriceJoiner.new
       @joiner.openid = current_user['openid']
-      @joiner.heading_url = current_user['heading_url']
+      @joiner.heading_url = current_user['headimgurl']
       @joiner.phone_number = params[:user][:phone]
       @joiner.point = 0
       @joiner.nickname = current_user['nickname']
@@ -34,7 +34,7 @@ class FirstPriceBargainController < ApplicationController
     @voter = FirstPriceVoter.new
     @voter.openid = current_user['openid']
     @voter.nickname = current_user['nickname']
-    @voter.heading_url = current_user['heading_url']
+    @voter.heading_url = current_user['headimgurl']
     @voter.first_price_joiner = FirstPriceJoiner.find_by_openid params[:openid]
     @voter.first_price_joiner.with_lock do
       @voter.first_price_joiner.point += point_per
@@ -68,13 +68,14 @@ class FirstPriceBargainController < ApplicationController
     #user = {}
     #user['nickname'] = 'other'
     #user['openid'] = 'xvsdf065ys980880'
-    #user['heading_url'] = 'http://www.ifeng.com/xyz.jpg'
+    #user['headimgurl'] = 'http://www.ifeng.com/xyz.jpg'
     #user
     session[:user_info]
   end
 
   def auth_wechat
     #Rails.logger.info session[:user_info].inspect
+    wechat_client()
     if(session[:user_info] == nil)
       if(params[:code] == nil)
         #Rails.logger.info 'redirect to' + wechat_client.authorize_url(request.url, 'snsapi_userinfo')
