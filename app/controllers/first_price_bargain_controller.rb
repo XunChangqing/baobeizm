@@ -1,6 +1,5 @@
 class FirstPriceBargainController < ApplicationController
   before_action :auth_wechat
-  #before_action :current_user
   layout 'first_price_bargain'
 
   def show
@@ -66,12 +65,12 @@ class FirstPriceBargainController < ApplicationController
 
   private
   def current_user
-    user = {}
-    user['nickname'] = 'other'
-    user['openid'] = 'xvsdf065ys980880'
-    user['heading_url'] = 'http://www.ifeng.com/xyz.jpg'
-    user
-    #session[:user_info]
+    #user = {}
+    #user['nickname'] = 'other'
+    #user['openid'] = 'xvsdf065ys980880'
+    #user['heading_url'] = 'http://www.ifeng.com/xyz.jpg'
+    #user
+    session[:user_info]
   end
 
   def auth_wechat

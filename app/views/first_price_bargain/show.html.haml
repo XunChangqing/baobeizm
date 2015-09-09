@@ -64,11 +64,11 @@
       =link_to "排行榜", "#tab-list", html_options = { "data-toggle" => "tab" }
     %li
       =link_to "规则和奖品", "#tab-rule", html_options = { "data-toggle" => "tab" }
-    %li
-      -if @current_joiner
+    -if @current_joiner
+      %li
         =link_to  "给力好友", "#tab-voters", html_options = { "joiner" => @current_joiner['openid'],"data-toggle" => "tab" }
-      -else
-        =link_to "给力好友", "#tab-voters", html_options = { "data-toggle" => "tab" }
+      -#-else
+        -#=link_to "给力好友", "#tab-voters", html_options = { "data-toggle" => "tab" }
   
   .tab-content
     .tab-pane.active#tab-list
@@ -113,17 +113,17 @@
             %td
               %p.rule-head 活动时间:
               %p.rule-body 2015/09/13 - 2015/09/29
-    .tab-pane#tab-voters
-      -#-if @current_joiner
-      .voters-infinite-table{openid: @current_joiner.openid}
-        %table.table
-          %thead
-            %tr
-              %th 头像 
-              %th 昵称
-              %th 给力点数
-          %tbody
-            -#=render partial: 'voters', locals:{page_offset: 1}
-        %p.voters-pagination
-          -#=link_to '下一页', {remote: true, action: 'show_voters', page: 1, openid: @current_joiner.openid}, {rel: 'next'}
+    -if @current_joiner
+      .tab-pane#tab-voters
+        .voters-infinite-table{openid: @current_joiner.openid}
+          %table.table
+            %thead
+              %tr
+                %th 头像 
+                %th 昵称
+                %th 给力点数
+            %tbody
+              -#=render partial: 'voters', locals:{page_offset: 1}
+          %p.voters-pagination
+            -#=link_to '下一页', {remote: true, action: 'show_voters', page: 1, openid: @current_joiner.openid}, {rel: 'next'}
   
