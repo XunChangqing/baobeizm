@@ -9,6 +9,7 @@
 
     -sign_package = $first_wechat_client.get_jssign_package(request.url) 
     :javascript
+      var $share_url = 'http://www.baobeizm.com/first_price_bargain/show?openid=#{@current_openid}'
       var $appId = '#{sign_package['appId']}';
       var $timestamp = '#{sign_package['timestamp']}';
       var $nonceStr = '#{sign_package['nonceStr']}';

@@ -14,10 +14,8 @@ wx.config(
 
 wx.ready ->
   wx.showOptionMenu()
-  wx.onMenuShareTimeline title: title, imgUrl: imgUrl
-  #, link: $share_url
-  wx.onMenuShareAppMessage title: title, desc: desc, imgUrl: imgUrl
-  #, link: $share_url
+  wx.onMenuShareTimeline title: title, imgUrl: imgUrl, link: $share_url
+  wx.onMenuShareAppMessage title: title, desc: desc, imgUrl: imgUrl, link: $share_url
   #alert 'weixin init ok'
 
 $ ->
