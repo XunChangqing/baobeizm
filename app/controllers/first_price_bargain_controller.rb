@@ -93,7 +93,11 @@ class FirstPriceBargainController < ApplicationController
         redirect_to wechat_client.authorize_url(request.url, 'snsapi_userinfo')
       else
         sns_info = wechat_client.get_oauth_access_token(params[:code])
+        if sns_info[:errcode] not nil
+          redirect_to action: 'show', openid: params[:openid]
         user_info = wechat_client.get_oauth_userinfo(sns_info.result['openid'], sns_info.result['access_token'])
+        if user_info[:errcode] not nil
+          redirect_to action: 'show', openid: params[:openid]
         session[:user_info] = user_info.result
       end
     end
