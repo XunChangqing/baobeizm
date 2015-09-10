@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908022939) do
+ActiveRecord::Schema.define(version: 20150910115848) do
 
   create_table "first_price_joiners", force: :cascade do |t|
     t.string   "phone_number"
@@ -21,10 +21,12 @@ ActiveRecord::Schema.define(version: 20150908022939) do
     t.integer  "point"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "name"
   end
 
   add_index "first_price_joiners", ["openid"], name: "index_first_price_joiners_on_openid", unique: true
   add_index "first_price_joiners", ["point"], name: "index_first_price_joiners_on_point"
+  add_index "first_price_joiners", ["updated_at"], name: "index_first_price_joiners_on_updated_at"
 
   create_table "first_price_voters", force: :cascade do |t|
     t.string   "nickname"

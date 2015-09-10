@@ -1,6 +1,7 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
 
+.container{
+  width: 750px;
+}
 .weixin-container
 {
   width: 750px;
@@ -11,13 +12,58 @@
   position: relative;
   width: 750px;
   height: 1186px;
-  background: url('/image/fpb/firstpriceback.png');
+  background: url('/image/fpb/firstpriceback.jpg');
+}
+.firstprice-head-other{
+  position: relative;
+  width: 750px;
+  height: 1186px;
+  background: url('/image/fpb/mainback.jpg');
 }
 
 .firstprice-body{
-  padding: 1%;
+  /*padding: 2%;*/
   width: 750px;
-  background: #901919;
+  background: #941A1A;
+  /*background: #901919;*/
+  .tab-head-back{
+    padding: 0px 20px 0px;
+    /*background: #941A1A;*/
+    /*background: url('/image/fpb/body-head.png');*/
+    /*background-repeat: no-repeat;*/
+    .nav{
+      /*margin: 10px,10px,10px; */
+      li.active{
+        a{
+          border-top-left-radius:20px;
+          border-top-right-radius:20px;
+          /*border-bottom-right-radius:2em;*/
+          /*border-bottom-left-radius:2em;*/
+          background:#F4B428;
+          color: red;
+          border: none;
+          /*border-style: 1px solid yellow;*/
+          /*border-radius: 20px;*/
+          border:5px solid #F4B428;
+          font-size: 250%;
+        }
+      }
+      li{
+        a{
+          border-top-left-radius:20px;
+          border-top-right-radius:20px;
+          background-color:#c32222;
+          color: yellow;
+          border:5px outset #E12727;
+          font-size: 250%;
+        }
+      }
+    }
+  }
+  .tab-body-back{
+    background: url('/image/fpb/body-body.png');
+    padding: 0px 40px 0px;
+  }
 }
 
 @media (min-width: 0px) {
@@ -27,14 +73,13 @@
   }
 }
 
-
-.current-point{
-  position: absolute;
-  top: 440px;
-  left: 261px; 
-  color: yellow;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
+/*.current-point{*/
+  /*position: absolute;*/
+  /*top: 440px;*/
+  /*left: 261px; */
+  /*color: yellow;*/
+  /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+/*}*/
 
 @mixin current-point-num($left-pos) {
   position: absolute;
@@ -42,7 +87,10 @@
   left: $left-pos; 
   font-size: 1300%;
   color: red;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  /*border: 2px inset white;*/
+  font-family: "STHupo";
+  font-weight: lighter;
 }
 
 .point{
@@ -60,10 +108,138 @@
   }
 }
 
+#vote-success-modal{
+  /*background: url('/image/fpb/popup.png');*/
+  /*width:750px;*/
+  /*height:1060px;*/
+  .modal-dialog{
+    background: transparent;
+    .modal-content{
+      background: transparent;
+      .modal-body{
+        width:696px;
+        height:1010px;
+        background: url('/image/fpb/npopup.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        font-size: 400%;
+        img{
+          position: absolute;
+          top: 15px;
+          width: 204px;
+          height: 217px;
+          left:246px;
+          border-radius: 60px;
+        }
+        #close-vote-success{
+          /*background: yellow;*/
+          position: absolute;
+          left: 87%;
+          width: 11%;
+          top: 10%;
+          height: 8%;
+          border-radius: 50%;
+        }
+        #vote-success-link{
+          /*background: yellow;*/
+          position: absolute;
+          left:20%;
+          width: 64%;
+          top: 61%;
+          height: 8.9%;
+        }
+      }
+    }
+  }
+}
+
+#joinModal{
+  .modal-dialog {
+    background: transparent;
+    .modal-content 
+    {
+      /*background: yellow;*/
+      background: transparent;
+      .modal-body{
+        /*position: relative;*/
+        /*text-align: center;*/
+        width:672px;
+        height:1004px;
+        background: url('/image/fpb/join.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        font-size: 400%;
+        img{
+          position: absolute;
+          left:227px;
+          width: 217px;
+          top: 10px;
+          height: 217px;
+          border-radius: 60px;
+        }
+        form{
+          /*position: absolute;*/
+          input.user-name{
+            display: block;
+            position: absolute;
+            top: 315px;
+            left: 130px;
+            width: 400px;
+            border-style: inset
+          }
+          input.user-phone{
+            display: block;
+            position: absolute;
+            top: 425px;
+            left: 130px;
+            width: 400px;
+            border-style: inset
+          }
+          input.submit{
+            display: block;
+            position: absolute;
+            border: none;
+            top: 588px;
+            left: 130px;
+            width: 400px;
+            height: 110px;
+            background: url('/image/fpb/btnsubmitup.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+          }
+        }
+        #close-vote-success{
+          /*background: yellow;*/
+          position: absolute;
+          left: 87%;
+          width: 11%;
+          top: 10%;
+          height: 8%;
+          border-radius: 50%;
+        }
+        #vote-success-link{
+          /*background: yellow;*/
+          position: absolute;
+          left:15%;
+          width: 68%;
+          top: 66%;
+          height: 8.9%;
+        }
+      }
+    }
+  }
+}
+
+.rank-back{
+  position: absolute;
+  top: 730px;
+  left: 200px;
+}
+
 .myrank{
   position: absolute;
   top: 760px;
-  left: 261px;
+  left: 268px;
   font-size: 30px;
   color: yellow;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -99,24 +275,9 @@
   @include home-btn(270px);
 }
 
-.nav{
-  li.active{
-    a{
-      background:#F4B428;
-      color: red;
-      font-size: 250%;
-    }
-  }
-  li{
-    a{
-      background-color:#c32222;
-      color: yellow;
-      font-size: 250%;
-    }
-  }
-}
 
 .table{
+  margin: 0 auto;
   background-color: #CA2323;
   thead, tbody{
     tr{
@@ -125,6 +286,7 @@
         color: #FCF24E;
         font-size: 200%;
         text-align: center;
+        border: none;
       }
       td{
         vertical-align: middle;
@@ -149,7 +311,9 @@
     tr{
       height: 124px;
       td img{
-        height: 124px;
+        height: 120px;
+        /*border-radius: 20%;*/
+        /*border:5px outset #E9CB63;*/
       }
     }
   }
@@ -168,15 +332,7 @@
   }
 }
 
-.modal-header, .modal-body{
-  background-color: #B72020;
-  color: yellow;
-  font-size: 400%;
-}
-
-.form-control
-{
-  font-size: 100%;
-  height: 150%;
+.joiners-pagination, .voters-pagination{
+  margin: 0px;
 }
 

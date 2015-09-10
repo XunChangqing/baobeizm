@@ -1,6 +1,9 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+title = "【巴黎春天】0元抢购iphone6s"
+desc = "小伙伴们，救救我的肾，一起来为我砍价助力抢iphone6s"
+imgUrl = "http://www.baobeizm.com/image/fpb/share.png"
 wx.config(
   debug: false
   appId: $appId
@@ -12,21 +15,11 @@ wx.config(
 wx.ready ->
   wx.showOptionMenu()
   #imgUrl
-  wx.onMenuShareTimeline title: '搜房砍价'
-  wx.onMenuShareAppMessage title: '搜房砍价'
-
-#$('a#tab-list]').on('shown.bs.tab', ->
-  #href = 
-#function (e) {
-  #var target = $(this).data("target");
-  #var href = $(this).data("href");
-  #$.ajax({
-    #type: "GET",
-    #url: href,
-    #data: {tab: target},
-    #dataType: "script"
-  #});
-#})
+  wx.onMenuShareTimeline title: title
+  wx.onMenuShareTimeline imgUrl: imgUrl
+  wx.onMenuShareAppMessage title: title
+  wx.onMenuShareAppMessage desc: desc
+  wx.onMenuShareAppMessage imgUrl: imgUrl
 
 $ ->
   $('.joiners-infinite-table').infinitePages
@@ -52,21 +45,38 @@ $ ->
 
   #
 #load images
-
-
 $ ->
-  btnaup = new Image
-  btnaup.src = '/image/fpb/btnaup.png'
-  btnadown = new Image
-  btnadown.src = '/image/fpb/btnadown.png'
-  btnbup = new Image
-  btnbup.src = '/image/fpb/btnbup.png'
-  btnbdown = new Image
-  btnbdown.src = '/image/fpb/btnbdown.png'
-  btnsubmitup = new Image
-  btnsubmitup.src = '/image/fpb/btnsubmitup.png'
-  btnsubmitdown = new Image
-  btnsubmitdown.src = '/image/fpb/btnsubmitdown.png'
+  #btnaup = new Image
+  #btnaup.src = '/image/fpb/btnaup.png'
+  #btnadown = new Image
+  #btnadown.src = '/image/fpb/btnadown.png'
+  #btnbup = new Image
+  #btnbup.src = '/image/fpb/btnbup.png'
+  #btnbdown = new Image
+  #btnbdown.src = '/image/fpb/btnbdown.png'
+  #btnsubmitup = new Image
+  #btnsubmitup.src = '/image/fpb/btnsubmitup.png'
+  #btnsubmitdown = new Image
+  #btnsubmitdown.src = '/image/fpb/btnsubmitdown.png'
+  btnvoteup = new Image
+  btnvoteup.src = '/image/fpb/btnvoteup.png'
+  btnvotedown = new Image
+  btnvotedown.src = '/image/fpb/btnvotedown.png'
+
+  btninviteup = new Image
+  btninviteup.src = '/image/fpb/btninviteup.png'
+  btninvitedown = new Image
+  btninvitedown.src = '/image/fpb/btninvitedown.png'
+
+  btnjoinup = new Image
+  btnjoinup.src = '/image/fpb/btnjoinup.png'
+  btnjoindown = new Image
+  btnjoindown.src = '/image/fpb/btnjoindown.png'
+
+  btnselfup = new Image
+  btnselfup.src = '/image/fpb/btnselfup.png'
+  btnselfdown = new Image
+  btnselfdown.src = '/image/fpb/btnselfdown.png'
   
   refresh_list = ->
     #alert 'x'
@@ -90,38 +100,67 @@ $ ->
     $(this).delay('fast').queue(
       (next)->
         $(this).children('img').attr('src', tmpupimg)
+        if $(this).attr('href')
+          #alert $(this).attr('href')
+          window.location.replace $(this).attr('href')
+        else if $(this).attr('openid')
+          #alert 'openid'
+          $.post '/first_price_bargain/vote.json',
+            {openid: $(this).attr('openid')},
+            (data) ->
+              if data['error']
+                #alert data['error']
+                alert "无法投票"
+              if data['point']
+                if data['point'] > 9999
+                  p1val = p2val = p3val = p4val = '9'
+                else
+                  point = ('0000'+data['point']).slice(-4)
+                  #alert point
+                  p1val = point[0]
+                  p2val = point[1]
+                  p3val = point[2]
+                  p4val = point[3]
+                $('#p1').text(if point.length>4 then '9' else point[0] )
+                $('#p2').text(if point.length>4 then '9' else point[1] )
+                $('#p3').text(if point.length>4 then '9' else point[2] )
+                $('#p4').text(if point.length>4 then '9' else point[3] )
+                $('#friend-rank').text "好友排名:第#{data['rank']}位"
+                #alert data['rank']
+              votetag = $('#vote')
+              votetag.attr('openid', null)
+              votetag.attr('data-toggle', 'modal')
+              votetag.attr('data-target', '#inviteModal')
+              #votetag.children('h2').text '邀请好友'
+              votetag.attr('downimg', '/image/fpb/btninvitedown.png')
+              votetag.children('img').attr('src', '/image/fpb/btninviteup.png')
+              $('#vote-success-modal').modal 'show'
+              refresh_list()
+              #location.reload()
         next()
     )
-    if $(this).attr('openid')
-      $.post '/first_price_bargain/vote.json',
-        {openid: $(this).attr('openid')},
-        (data) ->
-          if data['error']
-            alert data['error']
-          if data['point']
-            if data['point'] > 9999
-              p1val = p2val = p3val = p4val = '9'
-            else
-              point = ('0000'+data['point']).slice(-4)
-              #alert point
-              p1val = point[0]
-              p2val = point[1]
-              p3val = point[2]
-              p4val = point[3]
-            $('#p1').text(if point.length>4 then '9' else point[0] )
-            $('#p2').text(if point.length>4 then '9' else point[1] )
-            $('#p3').text(if point.length>4 then '9' else point[2] )
-            $('#p4').text(if point.length>4 then '9' else point[3] )
-            $('#friend-rank').text "好友排名:第#{data['rank']}位"
-            #alert data['rank']
-          votetag = $('#vote')
-          votetag.attr('openid', null)
-          votetag.attr('data-toggle', 'modal')
-          votetag.attr('data-target', '#inviteModal')
-          votetag.children('h2').text '邀请好友'
-          refresh_list()
-          #location.reload()
 
+  $('#inviteModal').click ->
+    $(this).modal 'hide'
+  $('#close-vote-success').click ->
+    #alert 'click hide'
+    $('#vote-success-modal').modal 'hide'
+
+  $('#join-form').submit ->
+    if $('input#user-name').val().length<=0
+      alert "请输入有效的姓名!"
+      return false
+    if not $('input#user-phone').val().match /[0-9]{11}/i
+      alert "请输入有效的手机号码!"
+      return false
+    true
+
+    #if not $('input#user-name').val().exist?
+      #return false
+    #phonenum = $('input#user-phone').val()
+    #if phonenum.length <= 0
+      #return false
+    #true
 
   #$('.custom-btn').mousedown ->
     #$(this).children('img').attr('src', btnadown.src)

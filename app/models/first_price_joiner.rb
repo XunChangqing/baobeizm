@@ -5,7 +5,10 @@ class FirstPriceJoiner < ActiveRecord::Base
   #validates :nickname, presence: true
   #validates :heading_url, presence: true
   validates :point, presence: true
+  validates :name, presence: true
   def rank
-    FirstPriceJoiner.where("point > ?", point).count + 1
+    bigcount = FirstPriceJoiner.where("point > ?", point).count
+    equalcount = FirstPriceJoiner.where("point == ? AND updated_at < ?", point, updated_at).count
+    bigcount+equalcount+1
   end
 end

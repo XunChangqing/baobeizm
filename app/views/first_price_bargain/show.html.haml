@@ -1,129 +1,152 @@
+-#%div{'data-toggle': 'modal', 'data-target': '#vote-success-modal'} 
+  -#%h2 邀请好友
+-if @current_joiner == nil or @current_joiner == @myjoiner
+  -backimg = '/image/fpb/firstpriceback.jpg'
+-else
+  -backimg = '/image/fpb/mainback.jpg'
+:scss
+  .firstprice-head{
+    background: url("#{backimg}")
+    }
+
 .firstprice-head
   -if @current_joiner==nil or @current_joiner== @myjoiner
-    %h1.current-point 我的助力指数
+    -#%h1.current-point 我的助力指数
     -if @myjoiner
+      %img.rank-back{src: '/image/fpb/rankback.png'}
       %h1.myrank= '我的排名:第'+@myjoiner.rank.to_s+"位"
       -cpoint = @myjoiner.point
       =render partial: 'point', locals: {tp: @myjoiner.point}
-      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btnadown.png'} 
-        %img{src: '/image/fpb/btnaup.png'} 
-        %h2 邀请好友
+      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btninvitedown.png'} 
+        %img{src: '/image/fpb/btninviteup.png'} 
+        -#%h2 邀请好友
     -else
-      %h1.myrank 我的排名：
-      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnbdown.png'} 
-        %img{src: '/image/fpb/btnbup.png'}
-        %h2 我也要抢
+      -#%h1.myrank 我的排名：
+      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnjoindown.png'} 
+        %img{src: '/image/fpb/btnjoinup.png'}
+        -#%h2 我也要抢
         -cpoint = 0
   -else
-    %h1.current-point 好友助力指数
+    -#%h1.current-point 好友助力指数
+    %img.rank-back{src: '/image/fpb/rankback.png'}
     %h1#friend-rank.myrank= '好友排名:第'+@current_joiner.rank.to_s+"位"
     -#%h1.get-iphone-myrank 帮好友抢
     -cpoint = @current_joiner.point
     -if @has_vote
-      .custom-btn.home-left-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btnadown.png'} 
-        %img{src: '/image/fpb/btnaup.png'}
-        %h2 邀请好友
+      .custom-btn.home-left-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btninvitedown.png'} 
+        %img{src: '/image/fpb/btninviteup.png'}
+        -#%h2 邀请好友
     -else
-      #vote.custom-btn.home-left-btn{downimg: '/image/fpb/btnadown.png', openid: @current_joiner.openid} 
-        %img{src: '/image/fpb/btnaup.png'}
-        %h2 加油助力
+      #vote.custom-btn.home-left-btn{downimg: '/image/fpb/btnvotedown.png', openid: @current_joiner.openid} 
+        %img{src: '/image/fpb/btnvoteup.png'}
+        -#%h2 加油助力
     -if @myjoiner
-      %a.custom-btn.home-right-btn{href: '#{/first_price_bargain/show?openid=@myjoiner.openid}', downimg: '/image/fpb/btnbdown.png'} 
-        %img{src: '/image/fpb/btnbup.png'}
-        %h2 查看自己
+      .custom-btn.home-right-btn{href: "/first_price_bargain/show?openid=#{@myjoiner.openid}", downimg: '/image/fpb/btnselfdown.png'} 
+        %img{src: '/image/fpb/btnselfup.png'}
+        -#%h2 查看自己
     -else
-      .custom-btn.home-right-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnbdown.png'} 
-        %img{src: '/image/fpb/btnbup.png'}
-        %h2 我也要抢
+      .custom-btn.home-right-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnjoindown.png'} 
+        %img{src: '/image/fpb/btnjoinup.png'}
+        -#%h2 我也要抢
     
   =render partial: 'point', locals: {tp: cpoint}
 
   .modal.fade#joinModal{"role"=>"dialog"}
     .modal-dialog
       .modal-content
-        .modal-header
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          %p 参与抢iPhone 6S
         .modal-body
-          %form{action: "#{first_price_bargain_join_path}", method: "post"}
-            =phone_field "user", "phone", class: 'form-control', 'placeholder'=> '手机号码'
-            %input.form-control{type: "submit", value: '我也要抢iPhone!'}
+          %img{src: @current_user['headimgurl']}
+          %form#join-form{action: "#{first_price_bargain_join_path}", method: "post"}
+            %input#user-name.user-name{type: 'text', name: 'user[name]', placeholder: '真实姓名'}
+            %input#user-phone.user-phone{type: 'tel', name: 'user[phone]', placeholder: '手机号码'}
+            %input.submit{type: "submit", value: ""}
 
   .modal.fade#inviteModal{"role"=>"dialog"}
     .modal-dialog
       .modal-content
-        .modal-header
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          %p 参与抢iPhone 6S
         .modal-body
           %img.img-responsive{src: '/image/fpb/invitea.png'}
 
+  .modal.fade#vote-success-modal{"role"=>"dialog"}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          -if @current_joiner
+            %img{src: @current_joiner.heading_url}
+          %div#close-vote-success
+          %a#vote-success-link{href: 'http://www.ifeng.com'}
+
 .firstprice-body
-  %ul.nav.nav-tabs.nav-justified
-    %li.active
-      =link_to "排行榜", "#tab-list", html_options = { "data-toggle" => "tab" }
-    %li
-      =link_to "规则和奖品", "#tab-rule", html_options = { "data-toggle" => "tab" }
-    -if @current_joiner
+  .tab-head-back
+    %ul.nav.nav-tabs.nav-justified
+      %li.active
+        =link_to "排行榜", "#tab-list", html_options = { "data-toggle" => "tab" }
       %li
-        =link_to  "给力好友", "#tab-voters", html_options = { "joiner" => @current_joiner['openid'],"data-toggle" => "tab" }
-      -#-else
-        -#=link_to "给力好友", "#tab-voters", html_options = { "data-toggle" => "tab" }
-  
-  .tab-content
-    .tab-pane.active#tab-list
-      .joiners-infinite-table
-        %table.table.table-striped
-          %thead
-            %tr
-              %th 排名
-              %th 昵称
-              %th 人气指数
-              %th 头像
-          %tbody
-            -#=render partial: 'joiners', locals:{page_offset: 1}
-        %p.joiners-pagination
-          -#=link_to '', {remote: true, action: 'show_joiners', page: 1}, {rel: 'next'}
-          -#-if not @joiners.last_page?
-            -#=link_to '', {remote: true, action: 'show_joiners', page: @joiner.next_page}, {rel: 'next'}
-    .tab-pane#tab-rule
-      %table.table.table-striped
-        %tbody
-          %tr
-            %td
-              %p.rule-head 活动时间:
-              %p.rule-body 2015/09/13 - 2015/09/29
-          %tr
-            %td
-              %p.rule-head 活动时间:
-              %p.rule-body 2015/09/13 - 2015/09/29
-          %tr
-            %td
-              %p.rule-head 活动时间:
-              %p.rule-body 2015/09/13 - 2015/09/29
-          %tr
-            %td
-              %p.rule-head 活动时间:
-              %p.rule-body 2015/09/13 - 2015/09/29
-          %tr
-            %td
-              %p.rule-head 活动时间:
-              %p.rule-body 2015/09/13 - 2015/09/29
-          %tr
-            %td
-              %p.rule-head 活动时间:
-              %p.rule-body 2015/09/13 - 2015/09/29
-    -if @current_joiner
-      .tab-pane#tab-voters
-        .voters-infinite-table{openid: @current_joiner.openid}
-          %table.table
+        =link_to "规则和奖品", "#tab-rule", html_options = { "data-toggle" => "tab" }
+      -if @current_joiner
+        %li
+          =link_to  "给力好友", "#tab-voters", html_options = { "joiner" => @current_joiner['openid'],"data-toggle" => "tab" }
+        -#-else
+          -#=link_to "给力好友", "#tab-voters", html_options = { "data-toggle" => "tab" }
+  %img{src: '/image/fpb/body-head.png'}
+
+  .tab-body-back
+    .tab-content
+      .tab-pane.active#tab-list
+        .joiners-infinite-table
+          %table.table.table-striped
             %thead
               %tr
-                %th 头像 
+                %th 排名
                 %th 昵称
-                %th 给力点数
+                %th 人气指数
+                %th 头像
             %tbody
-              -#=render partial: 'voters', locals:{page_offset: 1}
-          %p.voters-pagination
+              =render partial: 'joiners', locals:{page_offset: 1}
+          %p.joiners-pagination
+            -#=link_to '', {remote: true, action: 'show_joiners', page: 1}, {rel: 'next'}
+            -#-if not @joiners.last_page?
+              -#=link_to '', {remote: true, action: 'show_joiners', page: @joiner.next_page}, {rel: 'next'}
+      .tab-pane#tab-rule
+        %table.table.table-striped
+          %tbody
+            %tr
+              %td
+                %p.rule-head 活动时间:
+                %p.rule-body 2015/09/13 - 2015/09/29
+            %tr
+              %td
+                %p.rule-head 活动时间:
+                %p.rule-body 2015/09/13 - 2015/09/29
+            %tr
+              %td
+                %p.rule-head 活动时间:
+                %p.rule-body 2015/09/13 - 2015/09/29
+            %tr
+              %td
+                %p.rule-head 活动时间:
+                %p.rule-body 2015/09/13 - 2015/09/29
+            %tr
+              %td
+                %p.rule-head 活动时间:
+                %p.rule-body 2015/09/13 - 2015/09/29
+            %tr
+              %td
+                %p.rule-head 活动时间:
+                %p.rule-body 2015/09/13 - 2015/09/29
+      -if @current_joiner
+        .tab-pane#tab-voters
+          .voters-infinite-table{openid: @current_joiner.openid}
+            %table.table.table-striped
+              %thead
+                %tr
+                  %th 头像 
+                  %th 昵称
+                  %th 给力点数
+              %tbody
+                -#=render partial: 'voters', locals:{page_offset: 1}
+            %p.voters-pagination
             -#=link_to '下一页', {remote: true, action: 'show_voters', page: 1, openid: @current_joiner.openid}, {rel: 'next'}
-  
+
+  %img{src: '/image/fpb/body-footer.png'}
+

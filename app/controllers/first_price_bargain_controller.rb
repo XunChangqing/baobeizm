@@ -3,6 +3,7 @@ class FirstPriceBargainController < ApplicationController
   layout 'first_price_bargain'
 
   def show
+    @current_user = current_user
     @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page
     @myjoiner = FirstPriceJoiner.find_by_openid(current_user['openid'])
     #params[:openid]
@@ -26,6 +27,7 @@ class FirstPriceBargainController < ApplicationController
       @joiner.openid = current_user['openid']
       @joiner.heading_url = current_user['headimgurl']
       @joiner.phone_number = params[:user][:phone]
+      @joiner.name = params[:user][:name]
       @joiner.point = 0
       @joiner.nickname = current_user['nickname']
       @joiner.save
@@ -34,17 +36,21 @@ class FirstPriceBargainController < ApplicationController
   end
 
   def vote
+    #byebug
     point_per = 5
     @voter = FirstPriceVoter.new
     @voter.openid = current_user['openid']
     @voter.nickname = current_user['nickname']
     @voter.heading_url = current_user['headimgurl']
     @voter.first_price_joiner = FirstPriceJoiner.find_by_openid params[:openid]
-    @voter.first_price_joiner.with_lock do
-      @voter.first_price_joiner.point += point_per
-      @voter.first_price_joiner.save!
-    end
+    #j = @voter.first_price_joiner
+    #j.with_lock do
+      #j.point += point_per
+      #j.save!
+    #end
     if @voter.save
+      @voter.first_price_joiner.point = @voter.first_price_joiner.first_price_voter.count * point_per
+      @voter.first_price_joiner.save
       render json: {point: @voter.first_price_joiner.point, rank: @voter.first_price_joiner.rank}
     else
       render json: {error: 1}
@@ -67,16 +73,17 @@ class FirstPriceBargainController < ApplicationController
     end
   end
 
-  private
+  public
   def current_user
     #user = {}
-    #user['nickname'] = 'other'
-    #user['openid'] = 'xvsdf065ys980880'
-    #user['headimgurl'] = 'http://www.ifeng.com/xyz.jpg'
+    #user['nickname'] = '10t'
+    #user['openid'] = '0998979j'
+    #user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
     #user
     session[:user_info]
   end
 
+  private
   def auth_wechat
     #Rails.logger.info session[:user_info].inspect
     wechat_client()

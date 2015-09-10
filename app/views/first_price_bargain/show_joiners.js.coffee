@@ -4,7 +4,9 @@
 <% end %>
 
 <% if @joiners==nil or @joiners.last_page? %>
-  $('.joiners-pagination').html("没有记录了")
+  #$('.joiners-pagination').remove()
+  $('.joiners-pagination').html("")
+  #$('.joiners-pagination').html("没有记录了")
 <% else %>
   $('.joiners-pagination')
     .html("<%=j link_to '', {action: 'show_joiners', remote: true, page: @joiners.next_page}, {rel: 'next'} %>")
