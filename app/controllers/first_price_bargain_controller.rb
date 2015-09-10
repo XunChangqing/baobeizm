@@ -69,7 +69,7 @@ class FirstPriceBargainController < ApplicationController
     @current_joiner = FirstPriceJoiner.find_by_openid(params['openid'])
     #byebug
     if @current_joiner
-      @voters = @current_joiner.first_price_voter.order(:created_at).page(params[:page])
+      @voters = @current_joiner.first_price_voter.order(created_at: :desc).page(params[:page])
     end
   end
 
