@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 title = "【巴黎春天】0元抢购iphone6s"
 desc = "小伙伴们，救救我的肾，一起来为我砍价助力抢iphone6s"
-imgUrl = "http://www.baobeizm.com/image/fpb/share.png"
+imgUrl = "http://www.baobeizm.com/image/fpb/share.jpg"
 wx.config(
   debug: false
   appId: $appId
