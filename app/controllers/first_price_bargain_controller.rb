@@ -88,7 +88,7 @@ class FirstPriceBargainController < ApplicationController
   def auth_wechat
     #Rails.logger.info session[:user_info].inspect
     wechat_client()
-    if(session[:user_info] == nil)
+    if(session[:user_info] == nil or session['openid']==nil)
       if(params[:code] == nil)
         #Rails.logger.info 'redirect to' + wechat_client.authorize_url(request.url, 'snsapi_userinfo')
         redirect_to wechat_client.authorize_url(request.url, 'snsapi_userinfo')
