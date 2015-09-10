@@ -3,6 +3,7 @@ class FirstPriceBargainController < ApplicationController
   layout 'first_price_bargain'
 
   def show
+    @current_openid = params[:openid]
     @current_user = current_user
     @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page
     @myjoiner = FirstPriceJoiner.find_by_openid(current_user['openid'])

@@ -13,7 +13,7 @@
       var $timestamp = '#{sign_package['timestamp']}';
       var $nonceStr = '#{sign_package['nonceStr']}';
       var $signature = '#{sign_package['signature']}';
-      var $share_url = 'http://www.baobeizm.com/first_price_bargain/show?openid=#{params[:openid]}'
+      var $share_url = 'http://www.baobeizm.com/first_price_bargain/show?openid=#{@current_openid}'
 
     = javascript_include_tag 'application' , 'data-turbolinks-track' => true
     = javascript_include_tag 'first_price_bargain' , 'data-turbolinks-track' => true
