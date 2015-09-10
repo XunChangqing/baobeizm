@@ -16,9 +16,12 @@ class FirstPriceBargainController < ApplicationController
       end
     end
     #to get right share url
-    if @current_joiner == nil and @myjoiner != nil
-      redirect_to action: 'show', openid: current_user['openid']
-    end
+    #if @current_joiner == nil and @myjoiner != nil
+      #redirect_to action: 'show', openid: @myjoiner.openid
+    #else if @current_joiner ==nil and @myjoiner == nil
+      #redirect_to action: 'show'
+    #end
+
   end
 
   def join
@@ -46,8 +49,8 @@ class FirstPriceBargainController < ApplicationController
     @voter.first_price_joiner = FirstPriceJoiner.find_by_openid params[:openid]
     #j = @voter.first_price_joiner
     #j.with_lock do
-      #j.point += point_per
-      #j.save!
+    #j.point += point_per
+    #j.save!
     #end
     if @voter.save
       @voter.first_price_joiner.point = @voter.first_price_joiner.first_price_voter.count * point_per
@@ -94,11 +97,11 @@ class FirstPriceBargainController < ApplicationController
         redirect_to wechat_client.authorize_url(request.url, 'snsapi_userinfo')
       else
         sns_info = wechat_client.get_oauth_access_token(params[:code])
-        if sns_info[:result]['access_token'] == nil
+        if sns_info.result['access_token'] == nil
           redirect_to action: 'show', openid: params[:openid]
         end
         user_info = wechat_client.get_oauth_userinfo(sns_info.result['openid'], sns_info.result['access_token'])
-        if user_info[:result]['openid'] == nil
+        if user_info.result['openid'] == nil
           redirect_to action: 'show', openid: params[:openid]
         end
         session[:user_info] = user_info.result

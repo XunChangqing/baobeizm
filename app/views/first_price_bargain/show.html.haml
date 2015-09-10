@@ -10,22 +10,24 @@
     }
 
 .firstprice-head
-  -if @current_joiner==nil or @current_joiner== @myjoiner
-    -#%h1.current-point 我的助力指数
+  -if @current_joiner==nil 
     -if @myjoiner
-      %img.rank-back{src: '/image/fpb/rankback.png'}
-      %h1.myrank= '我的排名:第'+@myjoiner.rank.to_s+"位"
-      -cpoint = @myjoiner.point
-      =render partial: 'point', locals: {tp: @myjoiner.point}
-      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btninvitedown.png'} 
-        %img{src: '/image/fpb/btninviteup.png'} 
-        -#%h2 邀请好友
+      .custom-btn.home-middle-btn{href: "/first_price_bargain/show?openid=#{@myjoiner.openid}", downimg: '/image/fpb/btnselfdown.png'} 
+        %img{src: '/image/fpb/btnselfup.png'}
+        -#%h2 查看自己
     -else
-      -#%h1.myrank 我的排名：
       .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnjoindown.png'} 
         %img{src: '/image/fpb/btnjoinup.png'}
         -#%h2 我也要抢
         -cpoint = 0
+  -else if @current_joiner== @myjoiner
+    %img.rank-back{src: '/image/fpb/rankback.png'}
+    %h1.myrank= '我的排名:第'+@myjoiner.rank.to_s+"位"
+    -cpoint = @myjoiner.point
+    =render partial: 'point', locals: {tp: @myjoiner.point}
+    .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btninvitedown.png'} 
+      %img{src: '/image/fpb/btninviteup.png'} 
+      -#%h2 邀请好友
   -else
     -#%h1.current-point 好友助力指数
     %img.rank-back{src: '/image/fpb/rankback.png'}
