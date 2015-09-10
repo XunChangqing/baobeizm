@@ -70,7 +70,7 @@ class FirstPriceBargainController < ApplicationController
   end
 
   def show_voters
-    @current_joiner = FirstPriceJoiner.find_by_openid(params['openid'])
+    @current_joiner = FirstPriceJoiner.find_by_openid(params[:openid])
     #byebug
     if @current_joiner
       @voters = @current_joiner.first_price_voter.order(created_at: :desc).page(params[:page])
@@ -91,7 +91,7 @@ class FirstPriceBargainController < ApplicationController
   def auth_wechat
     #Rails.logger.info session[:user_info].inspect
     wechat_client()
-    if(session[:user_info] == nil or session[:user_info][:openid]==nil)
+    if(session[:user_info] == nil or session[:user_info]['openid']==nil)
       if(params[:code] == nil)
         #Rails.logger.info 'redirect to' + wechat_client.authorize_url(request.url, 'snsapi_userinfo')
         redirect_to wechat_client.authorize_url(request.url, 'snsapi_userinfo')
