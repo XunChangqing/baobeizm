@@ -5,7 +5,7 @@ title = "【巴黎春天】0元抢购iphone6s"
 desc = "小伙伴们，救救我的肾，一起来为我砍价助力抢iphone6s"
 imgUrl = "http://www.baobeizm.com/image/fpb/share.jpg"
 wx.config(
-  debug: false
+  debug: true
   appId: $appId
   timestamp: $timestamp
   nonceStr: $nonceStr
@@ -20,6 +20,7 @@ wx.ready ->
   wx.onMenuShareAppMessage title: title
   wx.onMenuShareAppMessage desc: desc
   wx.onMenuShareAppMessage imgUrl: imgUrl
+  alert 'weixin init ok'
 
 $ ->
   $('.joiners-infinite-table').infinitePages
