@@ -20,7 +20,7 @@
         %img{src: '/image/fpb/btnjoinup.png'}
         -#%h2 我也要抢
         -cpoint = 0
-  -else if @current_joiner== @myjoiner
+  -if @current_joiner !=nil and  @current_joiner== @myjoiner
     %img.rank-back{src: '/image/fpb/rankback.png'}
     %h1.myrank= '我的排名:第'+@myjoiner.rank.to_s+"位"
     -cpoint = @myjoiner.point
