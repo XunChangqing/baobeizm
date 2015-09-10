@@ -11,6 +11,7 @@
 
 .firstprice-head
   -if @current_joiner==nil 
+    -cpoint = 0
     -if @myjoiner
       .custom-btn.home-middle-btn{href: "/first_price_bargain/show?openid=#{@myjoiner.openid}", downimg: '/image/fpb/btnselfdown.png'} 
         %img{src: '/image/fpb/btnselfup.png'}
@@ -19,7 +20,6 @@
       .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnjoindown.png'} 
         %img{src: '/image/fpb/btnjoinup.png'}
         -#%h2 我也要抢
-        -cpoint = 0
   -elsif @current_joiner== @myjoiner
     %img.rank-back{src: '/image/fpb/rankback.png'}
     %h1.myrank= '我的排名:第'+@myjoiner.rank.to_s+"位"
