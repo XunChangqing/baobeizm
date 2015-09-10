@@ -8,7 +8,7 @@ class FirstPriceJoiner < ActiveRecord::Base
   validates :name, presence: true
   def rank
     bigcount = FirstPriceJoiner.where("point > ?", point).count
-    equalcount = FirstPriceJoiner.where("point == ? AND updated_at < ?", point, updated_at).count
+    equalcount = FirstPriceJoiner.where("point = ? AND updated_at < ?", point, updated_at).count
     bigcount+equalcount+1
   end
 end
