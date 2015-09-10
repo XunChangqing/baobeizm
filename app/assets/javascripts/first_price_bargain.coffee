@@ -55,6 +55,10 @@ $ ->
   #btnsubmitup.src = '/image/fpb/btnsubmitup.png'
   #btnsubmitdown = new Image
   #btnsubmitdown.src = '/image/fpb/btnsubmitdown.png'
+  backimg = new Image
+  backimg.src = '/image/fpb/firstpriceback.jpg'
+  backmainimg = new Image
+  backmainimg.src = '/image/fpb/mainback.jpg'
   btnvoteup = new Image
   btnvoteup.src = '/image/fpb/btnvoteup.png'
   btnvotedown = new Image
