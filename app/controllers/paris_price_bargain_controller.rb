@@ -1,6 +1,8 @@
 class ParisPriceBargainController < ApplicationController
   layout 'paris_price_bargain'
   def show
+    response.headers.delete "X-Frame-Options"
+    #response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM http://some-origin.com"
   end
 
   def vote
