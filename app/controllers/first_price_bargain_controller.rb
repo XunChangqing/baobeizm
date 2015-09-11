@@ -3,6 +3,12 @@ class FirstPriceBargainController < ApplicationController
   layout 'first_price_bargain'
 
   def show
+    begin
+      Rails.logger.info "Wechat access token: "+$first_wechat_client.access_token
+    rescue
+      Rails.logger.info "Wechat access token: first_wechat_client cannot init"
+    end
+
     @current_openid = params[:openid]
     @current_user = current_user
     @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page
