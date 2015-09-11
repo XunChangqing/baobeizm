@@ -1,0 +1,2 @@
+module ParisPriceBargainHelper
+end

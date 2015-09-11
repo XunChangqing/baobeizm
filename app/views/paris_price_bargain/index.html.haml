@@ -1,0 +1,17 @@
+.container
+  -#=link_to '导出', action: 'export'
+  =link_to '导出', paris_price_bargain_export_path(format: :xlsx)
+  %table.table.table-hover
+    %thead
+      %tr
+        %td 姓名
+        %td 电话
+        %td 时间
+    %tbody
+      -@voters.each do |voter|
+        %tr
+          %td= voter.name
+          %td= voter.phone
+          %td= l voter.created_at
+
+  =paginate @voters

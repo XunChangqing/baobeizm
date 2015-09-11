@@ -23,3 +23,8 @@ config/*.yml
 !/log/.keep
 log/*
 /tmp
+.DS_Store
+.sass-cache
+/public/.DS_Store
+/public/image
+/public/system

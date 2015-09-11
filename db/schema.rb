@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910115848) do
+ActiveRecord::Schema.define(version: 20150910180300) do
 
   create_table "first_price_joiners", force: :cascade do |t|
     t.string   "phone_number"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20150910115848) do
 
   add_index "first_price_voters", ["first_price_joiner_id", "openid"], name: "index_first_price_voters_on_first_price_joiner_id_and_openid", unique: true
   add_index "first_price_voters", ["first_price_joiner_id"], name: "index_first_price_voters_on_first_price_joiner_id"
+
+  create_table "paris_price_bargain_voters", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "paris_price_bargain_voters", ["phone"], name: "index_paris_price_bargain_voters_on_phone", unique: true
 
   create_table "test_requesters", force: :cascade do |t|
     t.string   "name"

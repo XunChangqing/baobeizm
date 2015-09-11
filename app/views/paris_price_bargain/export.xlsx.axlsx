@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(:name=> '报名名单') do |sheet|
+  sheet.add_row ['姓名', '电话', '时间']
+  @voters.each do |voter|
+    sheet.add_row [voter.name, voter.phone, l(voter.created_at)]
+  end
+end

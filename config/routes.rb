@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   post 'first_price_bargain/join' => 'first_price_bargain#join', as: :first_price_bargain_join
   post 'first_price_bargain/vote' => 'first_price_bargain#vote', as: :first_price_bargain_vote
 
+  get 'paris_price_bargain/show' => 'paris_price_bargain#show', as: :paris_price_bargain_show
+  get 'paris_price_bargain/index' => 'paris_price_bargain#index', as: :paris_price_bargain_index
+  post 'paris_price_bargain/vote' => 'paris_price_bargain#vote', as: :paris_price_bargain_vote
+  get 'paris_price_bargain/export' => 'paris_price_bargain#export', as: :paris_price_bargain_export
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
