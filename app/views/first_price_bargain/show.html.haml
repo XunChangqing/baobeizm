@@ -1,9 +1,9 @@
 -#%div{'data-toggle': 'modal', 'data-target': '#vote-success-modal'} 
   -#%h2 邀请好友
 -if @current_joiner == nil or @current_joiner == @myjoiner
-  -backimg = '/image/fpb/firstpriceback.jpg'
+  -backimg = 'http://image.baobeizm.com/fpb/firstpriceback.jpg'
 -else
-  -backimg = '/image/fpb/mainback.jpg'
+  -backimg = 'http://image.baobeizm.com/fpb/mainback.jpg'
 :scss
   .firstprice-head{
     background: url("#{backimg}")
@@ -13,42 +13,42 @@
   -if @current_joiner==nil 
     -cpoint = 0
     -if @myjoiner
-      .custom-btn.home-middle-btn{href: "/first_price_bargain/show?openid=#{@myjoiner.openid}", downimg: '/image/fpb/btnselfdown.png'} 
-        %img{src: '/image/fpb/btnselfup.png'}
+      .custom-btn.home-middle-btn{href: "/first_price_bargain/show?openid=#{@myjoiner.openid}", downimg: 'http://image.baobeizm.com/fpb/btnselfdown.png'} 
+        %img{src: 'http://image.baobeizm.com/fpb/btnselfup.png'}
         -#%h2 查看自己
     -else
-      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnjoindown.png'} 
-        %img{src: '/image/fpb/btnjoinup.png'}
+      .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: 'http://image.baobeizm.com/fpb/btnjoindown.png'} 
+        %img{src: 'http://image.baobeizm.com/fpb/btnjoinup.png'}
         -#%h2 我也要抢
   -elsif @current_joiner== @myjoiner
-    %img.rank-back{src: '/image/fpb/rankback.png'}
+    %img.rank-back{src: 'http://image.baobeizm.com/fpb/rankback.png'}
     %h1.myrank= '我的排名:第'+@myjoiner.rank.to_s+"位"
     -cpoint = @myjoiner.point
     =render partial: 'point', locals: {tp: @myjoiner.point}
-    .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btninvitedown.png'} 
-      %img{src: '/image/fpb/btninviteup.png'} 
+    .custom-btn.home-middle-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: 'http://image.baobeizm.com/fpb/btninvitedown.png'} 
+      %img{src: 'http://image.baobeizm.com/fpb/btninviteup.png'} 
       -#%h2 邀请好友
   -else
     -#%h1.current-point 好友助力指数
-    %img.rank-back{src: '/image/fpb/rankback.png'}
+    %img.rank-back{src: 'http://image.baobeizm.com/fpb/rankback.png'}
     %h1#friend-rank.myrank= '好友排名:第'+@current_joiner.rank.to_s+"位"
     -#%h1.get-iphone-myrank 帮好友抢
     -cpoint = @current_joiner.point
     -if @has_vote
-      .custom-btn.home-left-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: '/image/fpb/btninvitedown.png'} 
-        %img{src: '/image/fpb/btninviteup.png'}
+      .custom-btn.home-left-btn{'data-toggle': 'modal', 'data-target': '#inviteModal', downimg: 'http://image.baobeizm.com/fpb/btninvitedown.png'} 
+        %img{src: 'http://image.baobeizm.com/fpb/btninviteup.png'}
         -#%h2 邀请好友
     -else
-      #vote.custom-btn.home-left-btn{downimg: '/image/fpb/btnvotedown.png', openid: @current_joiner.openid} 
-        %img{src: '/image/fpb/btnvoteup.png'}
+      #vote.custom-btn.home-left-btn{downimg: 'http://image.baobeizm.com/fpb/btnvotedown.png', openid: @current_joiner.openid} 
+        %img{src: 'http://image.baobeizm.com/fpb/btnvoteup.png'}
         -#%h2 加油助力
     -if @myjoiner
-      .custom-btn.home-right-btn{href: "/first_price_bargain/show?openid=#{@myjoiner.openid}", downimg: '/image/fpb/btnselfdown.png'} 
-        %img{src: '/image/fpb/btnselfup.png'}
+      .custom-btn.home-right-btn{href: "/first_price_bargain/show?openid=#{@myjoiner.openid}", downimg: 'http://image.baobeizm.com/fpb/btnselfdown.png'} 
+        %img{src: 'http://image.baobeizm.com/fpb/btnselfup.png'}
         -#%h2 查看自己
     -else
-      .custom-btn.home-right-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: '/image/fpb/btnjoindown.png'} 
-        %img{src: '/image/fpb/btnjoinup.png'}
+      .custom-btn.home-right-btn{'data-toggle': 'modal', 'data-target': '#joinModal', downimg: 'http://image.baobeizm.com/fpb/btnjoindown.png'} 
+        %img{src: 'http://image.baobeizm.com/fpb/btnjoinup.png'}
         -#%h2 我也要抢
     
   =render partial: 'point', locals: {tp: cpoint}
@@ -68,7 +68,7 @@
     .modal-dialog
       .modal-content
         .modal-body
-          %img.img-responsive{src: '/image/fpb/invitea.png'}
+          %img.img-responsive{src: 'http://image.baobeizm.com/fpb/invitea.png'}
 
   .modal.fade#vote-success-modal{"role"=>"dialog"}
     .modal-dialog
@@ -82,9 +82,9 @@
 .firstprice-body
   .tab-head-back
     .custom-nav
-      .tablink{href: "#tab-list", back: '/image/fpb/tab1.jpg'}
-      .tablink{href: "#tab-rule", back: '/image/fpb/tab2.jpg'}
-      .tablink{href: "#tab-voters", back: '/image/fpb/tab3.jpg'}
+      .tablink{href: "#tab-list", back: 'http://image.baobeizm.com/fpb/tab1.jpg'}
+      .tablink{href: "#tab-rule", back: 'http://image.baobeizm.com/fpb/tab2.jpg'}
+      .tablink{href: "#tab-voters", back: 'http://image.baobeizm.com/fpb/tab3.jpg'}
 
     -#%ul.nav.nav-tabs.nav-justified
       -#%li.active
@@ -96,7 +96,7 @@
           -#=link_to  "给力好友", "#tab-voters", html_options = { "joiner" => @current_joiner['openid'],"data-toggle" => "tab" }
         -#-#-else
           -#-#=link_to "给力好友", "#tab-voters", html_options = { "data-toggle" => "tab" }
-  %img{src: '/image/fpb/body-head.png'}
+  %img{src: 'http://image.baobeizm.com/fpb/body-head.png'}
 
   .tab-body-back
     .tab-content
@@ -132,5 +132,5 @@
           %p.voters-pagination
           -#=link_to '下一页', {remote: true, action: 'show_voters', page: 1, openid: @current_joiner.openid}, {rel: 'next'}
 
-  %img{src: '/image/fpb/body-footer.png'}
+  %img{src: 'http://image.baobeizm.com/fpb/body-footer.png'}
 

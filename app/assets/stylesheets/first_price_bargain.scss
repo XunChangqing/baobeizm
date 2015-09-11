@@ -11,13 +11,13 @@
   position: relative;
   width: 750px;
   height: 1186px;
-  background: url('/image/fpb/firstpriceback.jpg');
+  background: url('http://image.baobeizm.com/fpb/firstpriceback.jpg');
 }
 .firstprice-head-other{
   position: relative;
   width: 750px;
   height: 1186px;
-  background: url('/image/fpb/mainback.jpg');
+  background: url('http://image.baobeizm.com/fpb/mainback.jpg');
 }
 
 .firstprice-body{
@@ -28,10 +28,10 @@
   .tab-head-back{
     padding: 0px 20px 0px;
     /*background: #941A1A;*/
-    /*background: url('/image/fpb/body-head.png');*/
+    /*background: url('http://image.baobeizm.com/fpb/body-head.png');*/
     /*background-repeat: no-repeat;*/
     .custom-nav{
-      background: url('/image/fpb/tab1.jpg');
+      background: url('http://image.baobeizm.com/fpb/tab1.jpg');
       width: 710px;
       height: 102px;
       .tablink{
@@ -43,7 +43,7 @@
     }
   }
   .tab-body-back{
-    background: url('/image/fpb/body-body.png');
+    background: url('http://image.baobeizm.com/fpb/body-body.png');
     padding: 0px 40px 0px;
   }
 }
@@ -91,7 +91,7 @@
 }
 
 #vote-success-modal{
-  /*background: url('/image/fpb/popup.png');*/
+  /*background: url('http://image.baobeizm.com/fpb/popup.png');*/
   /*width:750px;*/
   /*height:1060px;*/
   .modal-dialog{
@@ -101,7 +101,7 @@
       .modal-body{
         width:696px;
         height:1010px;
-        background: url('/image/fpb/npopup.png');
+        background: url('http://image.baobeizm.com/fpb/npopup.png');
         background-size: 100% 100%;
         background-repeat: no-repeat;
         font-size: 400%;
@@ -147,7 +147,7 @@
         /*text-align: center;*/
         width:672px;
         height:1004px;
-        background: url('/image/fpb/join.png');
+        background: url('http://image.baobeizm.com/fpb/join.png');
         background-size: 100% 100%;
         background-repeat: no-repeat;
         font-size: 400%;
@@ -196,7 +196,7 @@
             left: 130px;
             width: 400px;
             height: 110px;
-            background: url('/image/fpb/btnsubmitup.png');
+            background: url('http://image.baobeizm.com/fpb/btnsubmitup.png');
             background-size: 100% 100%;
             background-repeat: no-repeat;
           }

@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 title = "【巴黎春天】0元抢购iphone6s"
 desc = "小伙伴们，救救我的肾，一起来为我砍价助力抢iphone6s"
-imgUrl = "http://www.baobeizm.com/image/fpb/share.jpg"
+imgUrl = "http://image.baobeizm.com/fpb/share.jpg"
 #wx.config(
   #debug: false
   #appId: $appId
@@ -43,47 +43,47 @@ $ ->
 #load images
 $ ->
   #btnaup = new Image
-  #btnaup.src = '/image/fpb/btnaup.png'
+  #btnaup.src = 'http://image.baobeizm.com/fpb/btnaup.png'
   #btnadown = new Image
-  #btnadown.src = '/image/fpb/btnadown.png'
+  #btnadown.src = 'http://image.baobeizm.com/fpb/btnadown.png'
   #btnbup = new Image
-  #btnbup.src = '/image/fpb/btnbup.png'
+  #btnbup.src = 'http://image.baobeizm.com/fpb/btnbup.png'
   #btnbdown = new Image
-  #btnbdown.src = '/image/fpb/btnbdown.png'
+  #btnbdown.src = 'http://image.baobeizm.com/fpb/btnbdown.png'
   #btnsubmitup = new Image
-  #btnsubmitup.src = '/image/fpb/btnsubmitup.png'
+  #btnsubmitup.src = 'http://image.baobeizm.com/fpb/btnsubmitup.png'
   #btnsubmitdown = new Image
-  #btnsubmitdown.src = '/image/fpb/btnsubmitdown.png'
+  #btnsubmitdown.src = 'http://image.baobeizm.com/fpb/btnsubmitdown.png'
   backimg = new Image
-  backimg.src = '/image/fpb/firstpriceback.jpg'
+  backimg.src = 'http://image.baobeizm.com/fpb/firstpriceback.jpg'
   backmainimg = new Image
-  backmainimg.src = '/image/fpb/mainback.jpg'
+  backmainimg.src = 'http://image.baobeizm.com/fpb/mainback.jpg'
   btnvoteup = new Image
-  btnvoteup.src = '/image/fpb/btnvoteup.png'
+  btnvoteup.src = 'http://image.baobeizm.com/fpb/btnvoteup.png'
   btnvotedown = new Image
-  btnvotedown.src = '/image/fpb/btnvotedown.png'
+  btnvotedown.src = 'http://image.baobeizm.com/fpb/btnvotedown.png'
 
   btninviteup = new Image
-  btninviteup.src = '/image/fpb/btninviteup.png'
+  btninviteup.src = 'http://image.baobeizm.com/fpb/btninviteup.png'
   btninvitedown = new Image
-  btninvitedown.src = '/image/fpb/btninvitedown.png'
+  btninvitedown.src = 'http://image.baobeizm.com/fpb/btninvitedown.png'
 
   btnjoinup = new Image
-  btnjoinup.src = '/image/fpb/btnjoinup.png'
+  btnjoinup.src = 'http://image.baobeizm.com/fpb/btnjoinup.png'
   btnjoindown = new Image
-  btnjoindown.src = '/image/fpb/btnjoindown.png'
+  btnjoindown.src = 'http://image.baobeizm.com/fpb/btnjoindown.png'
 
   btnselfup = new Image
-  btnselfup.src = '/image/fpb/btnselfup.png'
+  btnselfup.src = 'http://image.baobeizm.com/fpb/btnselfup.png'
   btnselfdown = new Image
-  btnselfdown.src = '/image/fpb/btnselfdown.png'
+  btnselfdown.src = 'http://image.baobeizm.com/fpb/btnselfdown.png'
 
   tab1img = new Image
-  tab1img.src = '/image/fpb/tab1.jpg'
+  tab1img.src = 'http://image.baobeizm.com/fpb/tab1.jpg'
   tab2img = new Image
-  tab2img.src = '/image/fpb/tab2.jpg'
+  tab2img.src = 'http://image.baobeizm.com/fpb/tab2.jpg'
   tab3img = new Image
-  tab3img.src = '/image/fpb/tab3.jpg'
+  tab3img.src = 'http://image.baobeizm.com/fpb/tab3.jpg'
   
   refresh_list = ->
     #alert 'x'
@@ -139,8 +139,8 @@ $ ->
               votetag.attr('data-toggle', 'modal')
               votetag.attr('data-target', '#inviteModal')
               #votetag.children('h2').text '邀请好友'
-              votetag.attr('downimg', '/image/fpb/btninvitedown.png')
-              votetag.children('img').attr('src', '/image/fpb/btninviteup.png')
+              votetag.attr('downimg', 'http://image.baobeizm.com/fpb/btninvitedown.png')
+              votetag.children('img').attr('src', 'http://image.baobeizm.com/fpb/btninviteup.png')
               $('#vote-success-modal').modal 'show'
               refresh_list()
               #location.reload()
