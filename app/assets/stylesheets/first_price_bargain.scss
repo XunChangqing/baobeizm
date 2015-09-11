@@ -41,34 +41,6 @@
         float: left;
       }
     }
-    .nav{
-      /*margin: 10px,10px,10px; */
-      li.active{
-        a{
-          border-top-left-radius:20px;
-          border-top-right-radius:20px;
-          /*border-bottom-right-radius:2em;*/
-          /*border-bottom-left-radius:2em;*/
-          background:#F4B428;
-          color: red;
-          border: none;
-          /*border-style: 1px solid yellow;*/
-          /*border-radius: 20px;*/
-          border:5px solid #F4B428;
-          font-size: 250%;
-        }
-      }
-      li{
-        a{
-          border-top-left-radius:20px;
-          border-top-right-radius:20px;
-          background-color:#c32222;
-          color: yellow;
-          border:5px outset #E12727;
-          font-size: 250%;
-        }
-      }
-    }
   }
   .tab-body-back{
     background: url('/image/fpb/body-body.png');
@@ -300,6 +272,8 @@
 .table{
   margin: 0 auto;
   background-color: #CA2323;
+  table-layout: fixed;
+  word-wrap: break-word;
   thead, tbody{
     tr{
       th,td{
