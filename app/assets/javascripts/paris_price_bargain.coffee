@@ -29,7 +29,7 @@ refresh = (progress)->
   personimgs = ($("#people-#{num}") for num in personnums)
   #bags
   for money, i in bagnums
-    imgname = "/image/parispb/bag-#{money}"
+    imgname = "http://image.baobeizm.com/parispb/bag-#{money}"
     if bagthds[i]>progress
       bagimgs[i].attr('src', "#{imgname}-todo.png")
       bagimgs[i].css('height', '100px')
@@ -45,7 +45,7 @@ refresh = (progress)->
 
   ##people
   for num, i in personnums
-    imgname = "/image/parispb/people-#{num}"
+    imgname = "http://image.baobeizm.com/parispb/people-#{num}"
     if num<=progress and personnums[i+1]>progress
       personimgs[i].attr('src', "#{imgname}-on.png")
       personimgs[i].css('width', '118px')
