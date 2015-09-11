@@ -38,6 +38,8 @@ gem 'redis-namespace'
 # gem 'unicorn'
 gem 'kaminari'
 gem 'jquery-infinite-pages'
+gem 'axlsx'
+gem 'axlsx_rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
