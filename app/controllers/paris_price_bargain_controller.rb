@@ -4,7 +4,7 @@ class ParisPriceBargainController < ApplicationController
   end
 
   def vote
-    unless params[:update] == 1
+    unless params[:update] == "1"
       @voter = ParisPriceBargainVoter.new
       @voter.name = params[:user][:name]
       @voter.phone = params[:user][:phone]

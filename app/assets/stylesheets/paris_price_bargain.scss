@@ -15,10 +15,13 @@
   height: 546px;
   .progress-group{
     position: absolute;
-    left: 25px;
-    top: 200px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    top: 269px;
     height: 133px;
-    width: 950px;
+    width: 920px;
     vertical-align: center;
     .progress{
       position: absolute;
@@ -35,16 +38,15 @@
   }
   p#count{
     position: absolute;
-    left: 450px;
+    left: 440px;
     top: 435px;
     font-size: 40px;
     color: #790013;
   }
   .bags-group{
     position: absolute;
-    top: 70px;
-    /*left: 25px;*/
-    left:0;
+    top: 150px;
+    left: 40px;
     right:0;
     margin-left:auto;
     margin-right:auto;
@@ -54,6 +56,18 @@
       margin: 0px 40px 0px;
     }
   }
+  .people-group{
+    position: absolute;
+    top: 360px;
+    /*left: 25px;*/
+    left:40px;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    img{
+      margin: 0px 50px 0px;
+    }
+  }
 }
 
 .join-back{
@@ -61,7 +75,30 @@
   margin: 0 auto;
   height: 304px;
   background: url('/image/parispb/join-back.jpg');
-  /*position: absolute;*/
+  position: relative;
+  #vote-form{
+    #user-name{
+      position: absolute;
+      top: 80px;
+      left: 385px;
+      font-size: 30px;
+      width: 350px;
+    }
+    #user-phone{
+      position: absolute;
+      top: 175px;
+      left: 385px;
+      font-size: 30px;
+      width: 350px;
+    }
+    #submitbtn{
+      position: absolute;
+      top: 120px;
+      left: 750px;
+      font-size: 30px;
+      /*width: 200px;*/
+    }
+  }
 }
 
 //colors

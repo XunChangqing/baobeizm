@@ -8,22 +8,21 @@
     %img#bag-100{src: '#'}
     %img#bag-150{src: '#'}
     %img#bag-200{src: '#'}
-    -#%img#bag-250{src: '#'}
     %img#bag-300{src: '#'}
-  -#.persons-group
-    -#%img#person-0
-    -#%img#person-100
-    -#%img#person-300
-    -#%img#person-500
-    -#%img#person-800
-    -#%img#person-1000
+  .people-group
+    -#%img#people-0
+    %img#people-100
+    %img#people-300
+    %img#people-500
+    %img#people-800
+    %img#people-1000
   %p#count xxxxx
 
 .join-back
   %form#vote-form{action: "#{paris_price_bargain_vote_path}", method: "post"}
     %input#user-name.user-name{type: 'text', name: 'user[name]', placeholder: '真实姓名'}
     %input#user-phone.user-phone{type: 'tel', name: 'user[phone]', placeholder: '手机号码'}
-    %input.submit{type: "submit", value: ""}
+    %input#submitbtn.submit{type: "submit", value: "参与砍价"}
 
-
+#validate{val: 'yes'}
 
