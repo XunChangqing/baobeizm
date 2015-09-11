@@ -16,7 +16,6 @@ wx.ready ->
   wx.showOptionMenu()
   wx.onMenuShareTimeline title: title, imgUrl: imgUrl, link: $share_url
   wx.onMenuShareAppMessage title: title, desc: desc, imgUrl: imgUrl, link: $share_url
-  #alert 'weixin init ok'
 
 $ ->
   $('.joiners-infinite-table').infinitePages
@@ -78,6 +77,13 @@ $ ->
   btnselfup.src = '/image/fpb/btnselfup.png'
   btnselfdown = new Image
   btnselfdown.src = '/image/fpb/btnselfdown.png'
+
+  tab1img = new Image
+  tab1img.src = '/image/fpb/tab1.jpg'
+  tab2img = new Image
+  tab2img.src = '/image/fpb/tab2.jpg'
+  tab3img = new Image
+  tab3img.src = '/image/fpb/tab3.jpg'
   
   refresh_list = ->
     #alert 'x'
@@ -147,6 +153,10 @@ $ ->
     #alert 'click hide'
     $('#vote-success-modal').modal 'hide'
 
+  $('#close-join').click ->
+    #alert 'click hide'
+    $('#joinModal').modal 'hide'
+
   $('#join-form').submit ->
     if $('input#user-name').val().length<=0
       alert "请输入有效的姓名!"
@@ -172,3 +182,10 @@ $ ->
     #)
   #$('.custom-btn').vmouseup ->
     #$(this).children('img').attr('src', btnaup.src)
+$ ->
+  $(".tablink").click ->
+    $(this).tab('show')
+    imgurl = $(this).attr('back')
+    $('.custom-nav').css('background', "url('#{imgurl}')")
+
+  

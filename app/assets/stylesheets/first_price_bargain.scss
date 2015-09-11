@@ -1,4 +1,3 @@
-
 /*.container{*/
   /*width: 750px;*/
 /*}*/
@@ -31,6 +30,17 @@
     /*background: #941A1A;*/
     /*background: url('/image/fpb/body-head.png');*/
     /*background-repeat: no-repeat;*/
+    .custom-nav{
+      background: url('/image/fpb/tab1.jpg');
+      width: 710px;
+      height: 102px;
+      .tablink{
+        /*background: yellow;*/
+        width: 33%;
+        height: 100%;
+        float: left;
+      }
+    }
     .nav{
       /*margin: 10px,10px,10px; */
       li.active{
@@ -169,30 +179,41 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
         font-size: 400%;
+        #close-join{
+          /*background: yellow;*/
+          position: absolute;
+          left: 87%;
+          width: 11%;
+          top: 10%;
+          height: 8%;
+          border-radius: 50%;
+        }
         img{
           position: absolute;
-          left:227px;
-          width: 217px;
-          top: 10px;
+          left:237px;
+          width: 197px;
+          top: 12px;
           height: 217px;
           border-radius: 60px;
         }
         form{
           /*position: absolute;*/
           input.user-name{
+            font-size: 40px;
             display: block;
             position: absolute;
-            top: 315px;
-            left: 130px;
-            width: 400px;
+            top: 340px;
+            left: 220px;
+            width: 300px;
             border-style: inset
           }
           input.user-phone{
+            font-size: 40px;
             display: block;
             position: absolute;
-            top: 425px;
-            left: 130px;
-            width: 400px;
+            top: 485px;
+            left: 220px;
+            width: 300px;
             border-style: inset
           }
           input.submit{
@@ -295,11 +316,11 @@
           font-size: 400%;
         }
         p.rule-head{
-          font-size: 50%;
+          font-size: 40px;
           text-align: left;
         }
         p.rule-body{
-          font-size: 50%;
+          font-size: 25px;
           color: white;
           text-align: left;
         }

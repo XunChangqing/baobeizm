@@ -80,8 +80,8 @@ class FirstPriceBargainController < ApplicationController
   public
   def current_user
     #user = {}
-    #user['nickname'] = '10t'
-    #user['openid'] = '0998979j'
+    #user['nickname'] = '11t'
+    #user['openid'] = '090998979j'
     #user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
     #user
     session[:user_info]

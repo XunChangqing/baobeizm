@@ -58,6 +58,7 @@
       .modal-content
         .modal-body
           %img{src: @current_user['headimgurl']}
+          %div#close-join
           %form#join-form{action: "#{first_price_bargain_join_path}", method: "post"}
             %input#user-name.user-name{type: 'text', name: 'user[name]', placeholder: '真实姓名'}
             %input#user-phone.user-phone{type: 'tel', name: 'user[phone]', placeholder: '手机号码'}
@@ -76,20 +77,25 @@
           -if @current_joiner
             %img{src: @current_joiner.heading_url}
           %div#close-vote-success
-          %a#vote-success-link{href: 'http://www.ifeng.com'}
+          %a#vote-success-link{href: 'http://m.fang.com/zt/wap/201509/wmhxlxnh.html?city=wuhan&m=xfzx'}
 
 .firstprice-body
   .tab-head-back
-    %ul.nav.nav-tabs.nav-justified
-      %li.active
-        =link_to "排行榜", "#tab-list", html_options = { "data-toggle" => "tab" }
-      %li
-        =link_to "规则和奖品", "#tab-rule", html_options = { "data-toggle" => "tab" }
-      -if @current_joiner
-        %li
-          =link_to  "给力好友", "#tab-voters", html_options = { "joiner" => @current_joiner['openid'],"data-toggle" => "tab" }
-        -#-else
-          -#=link_to "给力好友", "#tab-voters", html_options = { "data-toggle" => "tab" }
+    .custom-nav
+      .tablink{href: "#tab-list", back: '/image/fpb/tab1.jpg'}
+      .tablink{href: "#tab-rule", back: '/image/fpb/tab2.jpg'}
+      .tablink{href: "#tab-voters", back: '/image/fpb/tab3.jpg'}
+
+    -#%ul.nav.nav-tabs.nav-justified
+      -#%li.active
+        -#=link_to "排行榜", "#tab-list", html_options = { "data-toggle" => "tab" }
+      -#%li
+        -#=link_to "规则和奖品", "#tab-rule", html_options = { "data-toggle" => "tab" }
+      -#-if @current_joiner
+        -#%li
+          -#=link_to  "给力好友", "#tab-voters", html_options = { "joiner" => @current_joiner['openid'],"data-toggle" => "tab" }
+        -#-#-else
+          -#-#=link_to "给力好友", "#tab-voters", html_options = { "data-toggle" => "tab" }
   %img{src: '/image/fpb/body-head.png'}
 
   .tab-body-back
@@ -112,43 +118,19 @@
       .tab-pane#tab-rule
         %table.table.table-striped
           %tbody
-            %tr
-              %td
-                %p.rule-head 活动时间:
-                %p.rule-body 2015/09/13 - 2015/09/29
-            %tr
-              %td
-                %p.rule-head 活动时间:
-                %p.rule-body 2015/09/13 - 2015/09/29
-            %tr
-              %td
-                %p.rule-head 活动时间:
-                %p.rule-body 2015/09/13 - 2015/09/29
-            %tr
-              %td
-                %p.rule-head 活动时间:
-                %p.rule-body 2015/09/13 - 2015/09/29
-            %tr
-              %td
-                %p.rule-head 活动时间:
-                %p.rule-body 2015/09/13 - 2015/09/29
-            %tr
-              %td
-                %p.rule-head 活动时间:
-                %p.rule-body 2015/09/13 - 2015/09/29
-      -if @current_joiner
-        .tab-pane#tab-voters
-          .voters-infinite-table{openid: @current_joiner.openid}
-            %table.table.table-striped
-              %thead
-                %tr
-                  %th 头像 
-                  %th 昵称
-                  %th 给力点数
-              %tbody
-                -#=render partial: 'voters', locals:{page_offset: 1}
-            %p.voters-pagination
-            -#=link_to '下一页', {remote: true, action: 'show_voters', page: 1, openid: @current_joiner.openid}, {rel: 'next'}
+            =render 'rules'
+      .tab-pane#tab-voters
+        .voters-infinite-table{"openid"=> (@current_joiner.openid if @current_joiner)}
+          %table.table.table-striped
+            %thead
+              %tr
+                %th 头像 
+                %th 昵称
+                %th 给力点数
+            %tbody
+              -#=render partial: 'voters', locals:{page_offset: 1}
+          %p.voters-pagination
+          -#=link_to '下一页', {remote: true, action: 'show_voters', page: 1, openid: @current_joiner.openid}, {rel: 'next'}
 
   %img{src: '/image/fpb/body-footer.png'}
 
