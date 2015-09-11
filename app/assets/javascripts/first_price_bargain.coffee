@@ -4,18 +4,25 @@
 title = "【巴黎春天】0元抢购iphone6s"
 desc = "小伙伴们，救救我的肾，一起来为我砍价助力抢iphone6s"
 imgUrl = "http://image.baobeizm.com/fpb/share.jpg"
-#wx.config(
-  #debug: false
-  #appId: $appId
-  #timestamp: $timestamp
-  #nonceStr: $nonceStr
-  #signature: $signature
-  #jsApiList: ['showOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage'] )
 
-#wx.ready ->
-  #wx.showOptionMenu()
-  #wx.onMenuShareTimeline title: title, imgUrl: imgUrl, link: $share_url
-  #wx.onMenuShareAppMessage title: title, desc: desc, imgUrl: imgUrl, link: $share_url
+try
+  wx.config(
+    debug: false
+    appId: $appId
+    timestamp: $timestamp
+    nonceStr: $nonceStr
+    signature: $signature
+    jsApiList: ['showOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage'] )
+  
+  wx.ready ->
+    try
+      wx.showOptionMenu()
+      wx.onMenuShareTimeline title: title, imgUrl: imgUrl, link: $share_url
+      wx.onMenuShareAppMessage title: title, desc: desc, imgUrl: imgUrl, link: $share_url
+    catch error
+
+catch error
+  #alert 'error'
 
 $ ->
   $('.joiners-infinite-table').infinitePages

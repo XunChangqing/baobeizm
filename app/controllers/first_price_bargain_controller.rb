@@ -79,38 +79,35 @@ class FirstPriceBargainController < ApplicationController
 
   public
   def current_user
-    #user = {}
-    #user['nickname'] = '11t'
-    #user['openid'] = '090998979j'
-    #user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
-    #user
-    session[:user_info]
+    if Rails.env == "development"
+      user = {}
+      user['nickname'] = '11t'
+      user['openid'] = '090998979j'
+      user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
+      user
+    else
+      session[:user_info]
+    end
   end
 
   private
   def auth_wechat
-    #Rails.logger.info session[:user_info].inspect
-    wechat_client()
-    if(session[:user_info] == nil or session[:user_info]['openid']==nil)
+    Rails.logger.info "auth_wechat: "+current_user.inspect
+    if(current_user == nil or current_user['openid']==nil)
       if(params[:code] == nil)
-        #Rails.logger.info 'redirect to' + wechat_client.authorize_url(request.url, 'snsapi_userinfo')
-        redirect_to wechat_client.authorize_url(request.url, 'snsapi_userinfo')
+        #Rails.logger.info 'redirect to' + $first_wechat_client.authorize_url(request.url, 'snsapi_userinfo')
+        redirect_to $first_wechat_client.authorize_url(request.url, 'snsapi_userinfo')
       else
-        sns_info = wechat_client.get_oauth_access_token(params[:code])
+        sns_info = $first_wechat_client.get_oauth_access_token(params[:code])
         #if sns_info.result['access_token'] == nil
           #redirect_to action: 'show', openid: params[:openid]
         #end
-        user_info = wechat_client.get_oauth_userinfo(sns_info.result['openid'], sns_info.result['access_token'])
+        user_info = $first_wechat_client.get_oauth_userinfo(sns_info.result['openid'], sns_info.result['access_token'])
         if user_info.result['openid'] == nil
           redirect_to action: 'show', openid: params[:openid]
         end
         session[:user_info] = user_info.result
       end
     end
-  end
-  def wechat_client
-    $first_wechat_client ||= WeixinAuthorize::Client.new(Rails.application.config.wechat['first_appid'], Rails.application.config.wechat['first_secret'])
-    $first_wechat_client.is_valid?
-    $first_wechat_client
   end
 end
