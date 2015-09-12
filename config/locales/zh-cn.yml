@@ -293,7 +293,7 @@ zh-CN:
     month_names: [~, 一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一月, 十二月]
 
   simple_captcha:
-    placeholder: "输入验证码"
+    placeholder: "验证码"
     label: "输入图片中的值:"
     refresh_button_text: "刷新验证码"
     message:

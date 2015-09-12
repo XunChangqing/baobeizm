@@ -71,7 +71,7 @@
           -if @current_joiner
             =form_for @nvoter, :url=> {:action=> :vote}, html: {id: 'vote-form', class: 'vote-form'} do |f|
               -#=show_simple_captcha :object=>"first_price_voter"
-              =show_simple_captcha :label => nil
+              =show_simple_captcha :label => '不区分大小写'
               -#=f.simple_captcha :label => "please enter the number"
               =f.hidden_field :first_price_joiner_id
               =f.submit '砍价'

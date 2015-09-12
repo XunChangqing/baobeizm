@@ -1,6 +1,6 @@
 SimpleCaptcha.setup do |sc|
   # default: 100x28
-  sc.image_size = '120x40'
+  #sc.image_size = '120x40'
 
   # default: 5
   sc.length = 3
@@ -16,7 +16,11 @@ SimpleCaptcha.setup do |sc|
   # 'charcoal_grey',
   # 'almost_invisible'
   # 'random'
-  sc.image_style = 'simply_red'
+  #sc.image_style = 'simply_red'
+  sc.image_style = 'mycaptha'
+  sc.add_image_style('mycaptha', [
+    "-background '#E12727'",
+    "-fill '#FDF927'"])
 
   # default: low
   # possible values: 'low', 'medium', 'high', 'random'
@@ -24,5 +28,5 @@ SimpleCaptcha.setup do |sc|
 
   # default: medium
   # possible values: 'none', 'low', 'medium', 'high'
-  sc.implode = 'none'
+  sc.implode = 'low'
 end
