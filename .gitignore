@@ -28,3 +28,4 @@ log/*
 /public/.DS_Store
 /public/image
 /public/system
+dump.rdb

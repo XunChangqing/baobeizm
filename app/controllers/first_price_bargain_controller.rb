@@ -1,6 +1,10 @@
 class FirstPriceBargainController < ApplicationController
-  before_action :auth_wechat
-  layout 'first_price_bargain'
+  USERS = { "soufang" => "masa-masa" }
+  before_action :authenticate, only: [:index_joiners, :index_voters]
+  before_action :auth_wechat, except: [:index_joiners, :index_voters]
+  layout 'first_price_bargain', except: [:index_joiners, :index_voters]
+  layout 'first_price_bargain_internal', only: [:index_joiners, :index_voters]
+  
 
   def show
     begin
@@ -11,7 +15,7 @@ class FirstPriceBargainController < ApplicationController
 
     @current_openid = params[:openid]
     @current_user = current_user
-    @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page
+    @joiners = FirstPriceJoiner.where('forbidden is not ?', true).order(point: :desc, updated_at: :asc).page
     @myjoiner = FirstPriceJoiner.find_by_openid(current_user['openid'])
     #params[:openid]
     if(params[:openid])
@@ -58,7 +62,9 @@ class FirstPriceBargainController < ApplicationController
     #j.point += point_per
     #j.save!
     #end
-    if @voter.save
+    if @voter.first_price_joiner.forbidden
+      render json: {error: 1}
+    elsif @voter.save
       @voter.first_price_joiner.point = @voter.first_price_joiner.first_price_voter.count * point_per
       @voter.first_price_joiner.save
       render json: {point: @voter.first_price_joiner.point, rank: @voter.first_price_joiner.rank}
@@ -68,7 +74,7 @@ class FirstPriceBargainController < ApplicationController
   end
 
   def show_joiners
-    @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page(params[:page])
+    @joiners = FirstPriceJoiner.where('forbidden is not ?', true).order(point: :desc, updated_at: :asc).page(params[:page])
     #@joiners = FirstPriceJoiner.page(params[:page])
     if @joiners
       @page_offset = (@joiners.current_page-1)*25+1
@@ -83,12 +89,20 @@ class FirstPriceBargainController < ApplicationController
     end
   end
 
+  def index_joiners
+    @joiners = FirstPriceJoiner.all.order(point: :desc)
+  end
+
+  def index_voters
+    @voters = FirstPriceJoiner.find_by_openid(params[:openid]).first_price_voter
+  end
+
   public
   def current_user
     if Rails.env == "development"
       user = {}
-      user['nickname'] = '11t'
-      user['openid'] = '090998979j'
+      user['nickname'] = '12t'
+      user['openid'] = 'iu8979j'
       user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
       user
     else
@@ -114,6 +128,12 @@ class FirstPriceBargainController < ApplicationController
         end
         session[:user_info] = user_info.result
       end
+    end
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_digest do |username|
+      USERS[username]
     end
   end
 end

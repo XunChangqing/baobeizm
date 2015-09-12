@@ -11,22 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910180300) do
+ActiveRecord::Schema.define(version: 20150912072931) do
 
-  create_table "first_price_joiners", force: :cascade do |t|
-    t.string   "phone_number"
-    t.string   "nickname"
-    t.string   "heading_url"
-    t.string   "openid"
-    t.integer  "point"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "name"
-  end
-
-  add_index "first_price_joiners", ["openid"], name: "index_first_price_joiners_on_openid", unique: true
-  add_index "first_price_joiners", ["point"], name: "index_first_price_joiners_on_point"
-  add_index "first_price_joiners", ["updated_at"], name: "index_first_price_joiners_on_updated_at"
+# Could not dump table "first_price_joiners" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "first_price_voters", force: :cascade do |t|
     t.string   "nickname"

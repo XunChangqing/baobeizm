@@ -1,0 +1,33 @@
+.container
+  -#=link_to '导出', action: 'export'
+  -#=link_to '导出', paris_price_bargain_export_path(format: :xlsx)
+  %table.table.table-hover
+    %thead
+      %tr
+        %td 姓名
+        %td 电话
+        %td 微信昵称
+        %td 得分
+        %td 时间
+        %td 微信头像
+        %td 查看
+        %td 状态
+
+    %tbody
+      -@joiners.each do |joiner|
+        %tr
+          %td= joiner.name
+          %td= joiner.phone_number
+          %td= joiner.nickname
+          %td= joiner.point
+          %td= l joiner.created_at
+          %td
+            %img{src: joiner.heading_url, width: '50px', height: '50px'}
+            -#=image_tag joiner.heading_url
+          %td
+            =link_to "查看投票人", action: :index_voters, openid: joiner.openid
+          %td
+            -if joiner.forbidden
+              %p '被禁止'
+
+  -#=paginate @voters
