@@ -40,6 +40,9 @@ gem 'kaminari'
 gem 'jquery-infinite-pages'
 gem 'axlsx'
 gem 'axlsx_rails'
+#gem "recaptcha", :require => "recaptcha/rails"
+#gem "humanizer"
+gem 'simple_captcha2', require: 'simple_captcha'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

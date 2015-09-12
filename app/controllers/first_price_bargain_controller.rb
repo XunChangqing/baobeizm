@@ -1,4 +1,5 @@
 class FirstPriceBargainController < ApplicationController
+  include SimpleCaptcha::ControllerHelpers
   USERS = { "soufang" => "masa-masa" }
   before_action :authenticate, only: [:index_joiners, :index_voters]
   before_action :auth_wechat, except: [:index_joiners, :index_voters]
@@ -15,13 +16,15 @@ class FirstPriceBargainController < ApplicationController
 
     @current_openid = params[:openid]
     @current_user = current_user
-    #@joiners = FirstPriceJoiner.where('forbidden is not ?', true).order(point: :desc, updated_at: :asc).page
-    @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page
+    @joiners = FirstPriceJoiner.where(forbidden: [false, nil]).order(point: :desc, updated_at: :asc).page
+    #@joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page
     @myjoiner = FirstPriceJoiner.find_by_openid(current_user['openid'])
     #params[:openid]
     if(params[:openid])
       @current_joiner = FirstPriceJoiner.find_by_openid params[:openid]
       if @current_joiner
+        @nvoter = FirstPriceVoter.new
+        @nvoter.first_price_joiner = @current_joiner
         @voters = @current_joiner.first_price_voter.order(:created_at).page if @current_joiner
         @has_vote = @current_joiner.first_price_voter.any?{ |voter| voter.openid == current_user['openid'] }
       end
@@ -51,20 +54,24 @@ class FirstPriceBargainController < ApplicationController
   end
 
   def vote
+    np = params.require(:first_price_voter).permit(:captcha, :captcha_key, :first_price_joiner_id, :humanizer_answer, :humanizer_question_id)
+    @voter = FirstPriceVoter.new(np)
     #byebug
     point_per = 5
-    @voter = FirstPriceVoter.new
     @voter.openid = current_user['openid']
     @voter.nickname = current_user['nickname']
     @voter.heading_url = current_user['headimgurl']
-    @voter.first_price_joiner = FirstPriceJoiner.find_by_openid params[:openid]
+    #@voter.first_price_joiner = FirstPriceJoiner.find_by_id np['first_price_joiner_id']
     #j = @voter.first_price_joiner
     #j.with_lock do
     #j.point += point_per
     #j.save!
     #end
-    if @voter.first_price_joiner.forbidden
-      render json: {error: 1}
+    #if @voter.first_price_joiner.forbidden
+      #render json: {error: 1}
+    #if @voter.save_with_captcha
+    if not simple_captcha_valid? 
+      render json: {error: 2}
     elsif @voter.save
       @voter.first_price_joiner.point = @voter.first_price_joiner.first_price_voter.count * point_per
       @voter.first_price_joiner.save
@@ -75,8 +82,8 @@ class FirstPriceBargainController < ApplicationController
   end
 
   def show_joiners
-    #@joiners = FirstPriceJoiner.where('forbidden is not ?', true).order(point: :desc, updated_at: :asc).page(params[:page])
-    @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page(params[:page])
+    @joiners = FirstPriceJoiner.where(forbidden: [false, nil]).order(point: :desc, updated_at: :asc).page(params[:page])
+    #@joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page(params[:page])
     #@joiners = FirstPriceJoiner.page(params[:page])
     if @joiners
       @page_offset = (@joiners.current_page-1)*25+1
@@ -103,8 +110,8 @@ class FirstPriceBargainController < ApplicationController
   def current_user
     if Rails.env == "development"
       user = {}
-      user['nickname'] = '12t'
-      user['openid'] = 'iu8979j'
+      user['nickname'] = '14t'
+      user['openid'] = 'xcv009j98lj'
       user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
       user
     else
@@ -122,7 +129,7 @@ class FirstPriceBargainController < ApplicationController
       else
         sns_info = $first_wechat_client.get_oauth_access_token(params[:code])
         #if sns_info.result['access_token'] == nil
-          #redirect_to action: 'show', openid: params[:openid]
+        #redirect_to action: 'show', openid: params[:openid]
         #end
         user_info = $first_wechat_client.get_oauth_userinfo(sns_info.result['openid'], sns_info.result['access_token'])
         if user_info.result['openid'] == nil

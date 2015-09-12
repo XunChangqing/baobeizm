@@ -118,39 +118,48 @@ $ ->
           #alert $(this).attr('href')
           window.location.replace $(this).attr('href')
         else if $(this).attr('openid')
-          #alert 'openid'
-          $.post '/first_price_bargain/vote.json',
-            {openid: $(this).attr('openid')},
-            (data) ->
-              if data['error']
-                #alert data['error']
-                alert "无法投票"
-              if data['point']
-                if data['point'] > 9999
-                  p1val = p2val = p3val = p4val = '9'
-                else
-                  point = ('0000'+data['point']).slice(-4)
-                  #alert point
-                  p1val = point[0]
-                  p2val = point[1]
-                  p3val = point[2]
-                  p4val = point[3]
-                $('#p1').text(if point.length>4 then '9' else point[0] )
-                $('#p2').text(if point.length>4 then '9' else point[1] )
-                $('#p3').text(if point.length>4 then '9' else point[2] )
-                $('#p4').text(if point.length>4 then '9' else point[3] )
-                $('#friend-rank').text "好友排名:第#{data['rank']}位"
-                #alert data['rank']
-              votetag = $('#vote')
-              votetag.attr('openid', null)
-              votetag.attr('data-toggle', 'modal')
-              votetag.attr('data-target', '#inviteModal')
-              #votetag.children('h2').text '邀请好友'
-              votetag.attr('downimg', 'http://image.baobeizm.com/fpb/btninvitedown.png')
-              votetag.children('img').attr('src', 'http://image.baobeizm.com/fpb/btninviteup.png')
-              $('#vote-success-modal').modal 'show'
-              refresh_list()
-              #location.reload()
+          $('#voteModal').modal 'show'
+          $('#voteModal').on 'shown.bs.modal', ->
+            #$('#human-input').focus()
+            $('#human-input').trigger 'keypress'
+          $('#vote-form').submit (e)->
+            $.post '/first_price_bargain/vote.json',
+              $(this).serialize(),
+              #{openid: $(this).attr('openid')},
+              (data) ->
+                #alert "砍价返回"
+                if data['error'] == 1
+                  alert "砍价失败"
+                else if data['error'] == 2
+                  alert "验证码错误"
+                else if data['point']
+                  if data['point'] > 9999
+                    p1val = p2val = p3val = p4val = '9'
+                  else
+                    point = ('0000'+data['point']).slice(-4)
+                    #alert point
+                    p1val = point[0]
+                    p2val = point[1]
+                    p3val = point[2]
+                    p4val = point[3]
+                  $('#p1').text(if point.length>4 then '9' else point[0] )
+                  $('#p2').text(if point.length>4 then '9' else point[1] )
+                  $('#p3').text(if point.length>4 then '9' else point[2] )
+                  $('#p4').text(if point.length>4 then '9' else point[3] )
+                  $('#friend-rank').text "好友排名:第#{data['rank']}位"
+                  #alert data['rank']
+                  votetag = $('#vote')
+                  votetag.attr('openid', null)
+                  votetag.attr('data-toggle', 'modal')
+                  votetag.attr('data-target', '#inviteModal')
+                  #votetag.children('h2').text '邀请好友'
+                  votetag.attr('downimg', 'http://image.baobeizm.com/fpb/btninvitedown.png')
+                  votetag.children('img').attr('src', 'http://image.baobeizm.com/fpb/btninviteup.png')
+                  $('#voteModal').modal 'hide'
+                  $('#vote-success-modal').modal 'show'
+                  refresh_list()
+            false
+                #location.reload()
         next()
     )
 

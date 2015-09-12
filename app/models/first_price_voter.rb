@@ -1,4 +1,5 @@
 class FirstPriceVoter < ActiveRecord::Base
+  apply_simple_captcha
   belongs_to :first_price_joiner
   #validates :nickname, presence: true
   validates :openid, presence: true

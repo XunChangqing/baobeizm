@@ -1,4 +1,4 @@
-zh-cn:
+zh-CN:
   welcome:
     index: 'GGL主页'
   common:
@@ -291,3 +291,11 @@ zh-cn:
       - 'day'
     day_names: [星期天, 星期一, 星期二, 星期三, 星期四, 星期五, 星期六]
     month_names: [~, 一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一月, 十二月]
+
+  simple_captcha:
+    placeholder: "输入验证码"
+    label: "输入图片中的值:"
+    refresh_button_text: "刷新验证码"
+    message:
+      default: "验证码不正确"
+      user: "验证码不正确"

@@ -64,6 +64,22 @@
             %input#user-phone.user-phone{type: 'tel', name: 'user[phone]', placeholder: '手机号码'}
             %input.submit{type: "submit", value: ""}
 
+  .modal.fade#voteModal{"role"=>"dialog"}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          -if @current_joiner
+            =form_for @nvoter, :url=> {:action=> :vote}, html: {id: 'vote-form', class: 'vote-form'} do |f|
+              -#=show_simple_captcha :object=>"first_price_voter"
+              =show_simple_captcha :label => nil
+              -#=f.simple_captcha :label => "please enter the number"
+              =f.hidden_field :first_price_joiner_id
+              =f.submit '砍价'
+          -#%form#vote-form{action: "#{first_price_bargain_vote_path}", method: "post"}
+            -#%input{type: 'hidden', name: 'openid', value: @current_joiner.openid}
+            -#=recaptcha_tags
+            -#%input.submit{type: "submit", value: "提交"}
+
   .modal.fade#inviteModal{"role"=>"dialog"}
     .modal-dialog
       .modal-content

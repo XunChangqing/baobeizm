@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912072931) do
+ActiveRecord::Schema.define(version: 20150912234126) do
 
 # Could not dump table "first_price_joiners" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20150912072931) do
   end
 
   add_index "paris_price_bargain_voters", ["phone"], name: "index_paris_price_bargain_voters_on_phone", unique: true
+
+  create_table "simple_captcha_data", force: :cascade do |t|
+    t.string   "key",        limit: 40
+    t.string   "value",      limit: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simple_captcha_data", ["key"], name: "idx_key"
 
   create_table "test_requesters", force: :cascade do |t|
     t.string   "name"
