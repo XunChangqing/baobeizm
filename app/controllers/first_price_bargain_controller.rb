@@ -15,7 +15,8 @@ class FirstPriceBargainController < ApplicationController
 
     @current_openid = params[:openid]
     @current_user = current_user
-    @joiners = FirstPriceJoiner.where('forbidden is not ?', true).order(point: :desc, updated_at: :asc).page
+    #@joiners = FirstPriceJoiner.where('forbidden is not ?', true).order(point: :desc, updated_at: :asc).page
+    @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page
     @myjoiner = FirstPriceJoiner.find_by_openid(current_user['openid'])
     #params[:openid]
     if(params[:openid])
@@ -74,7 +75,8 @@ class FirstPriceBargainController < ApplicationController
   end
 
   def show_joiners
-    @joiners = FirstPriceJoiner.where('forbidden is not ?', true).order(point: :desc, updated_at: :asc).page(params[:page])
+    #@joiners = FirstPriceJoiner.where('forbidden is not ?', true).order(point: :desc, updated_at: :asc).page(params[:page])
+    @joiners = FirstPriceJoiner.order(point: :desc, updated_at: :asc).page(params[:page])
     #@joiners = FirstPriceJoiner.page(params[:page])
     if @joiners
       @page_offset = (@joiners.current_page-1)*25+1
