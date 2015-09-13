@@ -118,6 +118,8 @@ $ ->
           #alert $(this).attr('href')
           window.location.replace $(this).attr('href')
         else if $(this).attr('openid')
+          $('#voteModal').modal backdrop: 'static'
+          #, keyboard: false
           $('#voteModal').modal 'show'
           $('#voteModal').on 'shown.bs.modal', ->
             #$('#human-input').focus()
@@ -127,11 +129,10 @@ $ ->
               $(this).serialize(),
               #{openid: $(this).attr('openid')},
               (data) ->
-                #alert "砍价返回"
                 if data['error'] == 1
-                  alert "砍价失败"
+                  $('#vote-errmsg').text "砍价失败"
                 else if data['error'] == 2
-                  alert "验证码错误"
+                  $('#vote-errmsg').text "验证码错误"
                 else if data['point']
                   if data['point'] > 9999
                     p1val = p2val = p3val = p4val = '9'

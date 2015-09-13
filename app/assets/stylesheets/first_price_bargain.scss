@@ -98,6 +98,16 @@
     .modal-content{
       border-radius: 20px;
       background: red;
+      .modal-header{
+        height: 100px;
+        .close{
+          font-size: 60px;
+        }
+        h4{
+          font-size: 30px;
+          color: yellow;
+        }
+      }
       .modal-body form{
         margin: 20px, 0px, 20px;
         text-align: center;
