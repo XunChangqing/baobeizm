@@ -3,7 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 totalpeople = 1000
-progressbar_width = 920
+#progressbar_width = 920
+progressbar_width = 0.92
 #bagnums = [50, 100, 150, 200, 250, 300]
 bagnums = [50, 100, 150, 200, 300]
 bagthds = [100, 300, 500, 800, 1000]
@@ -22,7 +23,7 @@ refresh = (progress)->
   ratio = progress / totalpeople
   p = Math.floor(ratio * 100) + '%'
   $('#progressbar').css('width', p)
-  left = (ratio*progressbar_width-80/2) + 'px'
+  left = (ratio*progressbar_width-0.08/2)*100 + '%'
   $('#shield').css('left', left)
 
   bagimgs = ($("#bag-#{num}") for num in bagnums)
@@ -32,38 +33,38 @@ refresh = (progress)->
     imgname = "http://image.baobeizm.com/parispb/bag-#{money}"
     if bagthds[i]>progress
       bagimgs[i].attr('src', "#{imgname}-todo.png")
-      bagimgs[i].css('height', '100px')
-      bagimgs[i].css('width', '100px')
+      bagimgs[i].css('height', '18.3%')
+      bagimgs[i].css('width', '10%')
     else if bagthds[i+1]>progress
       bagimgs[i].attr('src', "#{imgname}-doing.png")
-      bagimgs[i].css('height', '120px')
-      bagimgs[i].css('width', '120px')
+      bagimgs[i].css('height', '21.9%')
+      bagimgs[i].css('width', '12%')
     else
       bagimgs[i].attr('src', "#{imgname}-done.png")
-      bagimgs[i].css('height', '100px')
-      bagimgs[i].css('width', '100px')
+      bagimgs[i].css('height', '18.3%')
+      bagimgs[i].css('width', '10%')
 
   ##people
   for num, i in personnums
     imgname = "http://image.baobeizm.com/parispb/people-#{num}"
     if num<=progress and personnums[i+1]>progress
       personimgs[i].attr('src', "#{imgname}-on.png")
-      personimgs[i].css('width', '118px')
-      personimgs[i].css('height', '39px')
+      personimgs[i].css('width', '11.8%')
+      personimgs[i].css('height', '12.8%')
     else if num==1000 and progress>=1000 
       personimgs[i].attr('src', "#{imgname}-on.png")
-      personimgs[i].css('width', '118px')
-      personimgs[i].css('height', '39px')
+      personimgs[i].css('width', '11.8%')
+      personimgs[i].css('height', '12.8%')
     else
       personimgs[i].attr('src', "#{imgname}-off.png")
-      personimgs[i].css('width', '80px')
-      personimgs[i].css('height', '25px')
+      personimgs[i].css('width', '8%')
+      personimgs[i].css('height', '8.2%')
 
 $ ->
   try
     if $('#validate').attr('val') == 'yes'
       worker()
-    #refresh 1000
+    #refresh 100
     $('#vote-form').submit ->
       if $('input#user-name').val().length<=0
         alert "请输入有效的姓名!"

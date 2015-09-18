@@ -7,95 +7,146 @@
   /*margin: 0 auto;*/
 /*}*/
 
+.container{
+  padding: 0;
+}
+
 .progressbar-back{
-  width: 1000px;
+  /*width: 1000px;*/
+  width: 100%;
   margin: 0 auto;
   position: relative;
   background: url('http://image.baobeizm.com/parispb/progressbar-back.jpg');
-  height: 546px;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 0;
+  padding-top: 54.6%;
+  /*height: 546px;*/
   .progress-group{
     position: absolute;
     left:0;
     right:0;
     margin-left:auto;
     margin-right:auto;
-    top: 269px;
-    height: 133px;
-    width: 920px;
+    /*top: 269px;*/
+    top: 50%;
+    /*height: 133px;*/
+    height: 24.3%;
+    /*width: 920px;*/
+    width: 92%;
     vertical-align: center;
     .progress{
       position: absolute;
       width: 100%;
-      top: 25px;
+      /*top: 25px;*/
+      top: 4.5%;
     }
     img#shield{
       position: absolute;
-      width: 80px;
+      /*width: 80px;*/
+      width: 8%;
       /*width: 70%;*/
       /*top: 200px;*/
-      /*top: -10;*/
+      top: -10%;
     }
   }
   p#count{
     position: absolute;
-    left: 440px;
-    top: 435px;
-    font-size: 40px;
+    /*left: 440px;*/
+    left: 44%;
+    /*top: 435px;*/
+    top: 79.6%;
+    /*font-size: 40px;*/
+    font-size: 3.5vw;
+    /*font-size: 100%;*/
     color: #790013;
   }
   .bags-group{
     position: absolute;
-    top: 150px;
-    left: 40px;
+    /*top: 150px;*/
+    top: 27.4%;
+    /*left: 40px;*/
+    left: 4%;
     right:0;
     margin-left:auto;
     margin-right:auto;
     img{
-      width: 100px;
-      height: 100px;
-      margin: 0px 40px 0px;
+      /*width: 100px;*/
+      width: 10%;
+      /*height: 100px;*/
+      height: 18.3%;
+      margin: 0 4% 0;
     }
   }
   .people-group{
     position: absolute;
-    top: 360px;
+    /*top: 360px;*/
+    top: 65.9%;
     /*left: 25px;*/
-    left:40px;
+    /*left:40px;*/
+    left:4%;
     right:0;
     margin-left:auto;
     margin-right:auto;
     img{
-      margin: 0px 50px 0px;
+      margin: 0 5% 0;
     }
   }
 }
 
 .join-back{
-  width: 1000px;
+
+  /*width: 1000px;*/
   margin: 0 auto;
-  height: 304px;
+  /*height: 304px;*/
+  height: 0;
+  padding-top: 30.4%;
   background: url('http://image.baobeizm.com/parispb/join-back.jpg');
+
+width: 100%;
+margin: 0 auto;
+position: relative;
+background-repeat: no-repeat;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+
   position: relative;
   #vote-form{
     #user-name{
       position: absolute;
-      top: 80px;
-      left: 385px;
-      font-size: 30px;
-      width: 350px;
+      /*top: 80px;*/
+      top: 26.3%;
+      /*left: 385px;*/
+      left: 38.5%;
+      /*font-size: 30px;*/
+      font-size: 3.5vw;
+      /*width: 350px;*/
+      width: 35%;
     }
     #user-phone{
       position: absolute;
-      top: 175px;
-      left: 385px;
-      font-size: 30px;
-      width: 350px;
+      /*top: 175px;*/
+      top: 57.5%;
+      /*left: 385px;*/
+      left: 38.5%;
+      /*font-size: 30px;*/
+      font-size: 3.5vw;
+      /*width: 350px;*/
+      width: 35%;
     }
     #submitbtn{
       position: absolute;
-      top: 120px;
-      left: 750px;
-      font-size: 30px;
+      /*top: 120px;*/
+      top: 39.4%;
+      /*left: 750px;*/
+      left: 75%;
+      /*font-size: 30px;*/
+      font-size: 3.5vw;
       /*width: 200px;*/
     }
   }
@@ -109,10 +160,12 @@ $color_dell_44_approx: rgba(66, 92, 20, 0.44);
 
 .progress {
   background: $color_pompadour_approx;
-  border: 3px solid $black_100;
+  /*border: 50% solid $black_100;*/
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-  border-radius: 25px;
-  height: 39px;
+  /*border-radius: 25px;*/
+  border-radius: 10%;
+  /*height: 39px;*/
+  height: 20%;
 }
 .paris-progress-bar {
   background: $color_razzmatazz_approx;
@@ -120,5 +173,6 @@ $color_dell_44_approx: rgba(66, 92, 20, 0.44);
 .progress-striped .paris-progress-bar {
   background-color: $color_razzmatazz_approx;
   background-image: linear-gradient(45deg,$color_dell_44_approx 25%,transparent 25%,transparent 50%,$color_dell_44_approx 50%,$color_dell_44_approx 75%,transparent 75%,transparent);
-  background-size: 40px 40px;
+  /*background-size: 40px 40px;*/
+  /*background-size: 100% 30%;*/
 }
