@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'first_price_bargain/index_voters' => 'first_price_bargain#index_voters', as: :fpb_voters_index
 
   get 'paris_price_bargain/show' => 'paris_price_bargain#show', as: :paris_price_bargain_show
+  get 'paris_price_bargain/show_pc' => 'paris_price_bargain#show_pc', as: :paris_price_bargain_show_pc
   get 'paris_price_bargain/index' => 'paris_price_bargain#index', as: :paris_price_bargain_index
   post 'paris_price_bargain/vote' => 'paris_price_bargain#vote', as: :paris_price_bargain_vote
   get 'paris_price_bargain/export' => 'paris_price_bargain#export', as: :paris_price_bargain_export

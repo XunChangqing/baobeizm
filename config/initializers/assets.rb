@@ -14,3 +14,4 @@ Rails.application.config.assets.precompile += %w( first_price_bargain.css )
 
 Rails.application.config.assets.precompile += %w( paris_price_bargain.js )
 Rails.application.config.assets.precompile += %w( paris_price_bargain.css )
+Rails.application.config.assets.precompile += %w( paris_price_bargain_pc.css )

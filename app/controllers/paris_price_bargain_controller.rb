@@ -1,5 +1,9 @@
 class ParisPriceBargainController < ApplicationController
-  layout 'paris_price_bargain'
+  layout 'paris_price_bargain', except: :show_pc
+  layout 'paris_price_bargain_pc', only: :show_pc
+  def show_pc
+    response.headers.delete "X-Frame-Options"
+  end
   def show
     response.headers.delete "X-Frame-Options"
     #response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM http://some-origin.com"

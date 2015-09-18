@@ -1,0 +1,124 @@
+// Place all the styles related to the ParisPriceBargain controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/*.paris-container*/
+/*{*/
+  /*width: 1000px;*/
+  /*margin: 0 auto;*/
+/*}*/
+
+.progressbar-back{
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  background: url('http://image.baobeizm.com/parispb/progressbar-back.jpg');
+  height: 546px;
+  .progress-group{
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    top: 269px;
+    height: 133px;
+    width: 920px;
+    vertical-align: center;
+    .progress{
+      position: absolute;
+      width: 100%;
+      top: 25px;
+    }
+    img#shield{
+      position: absolute;
+      width: 80px;
+      /*width: 70%;*/
+      /*top: 200px;*/
+      /*top: -10;*/
+    }
+  }
+  p#count{
+    position: absolute;
+    left: 440px;
+    top: 435px;
+    font-size: 40px;
+    color: #790013;
+  }
+  .bags-group{
+    position: absolute;
+    top: 150px;
+    left: 40px;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    img{
+      width: 100px;
+      height: 100px;
+      margin: 0px 40px 0px;
+    }
+  }
+  .people-group{
+    position: absolute;
+    top: 360px;
+    /*left: 25px;*/
+    left:40px;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    img{
+      margin: 0px 50px 0px;
+    }
+  }
+}
+
+.join-back{
+  width: 1000px;
+  margin: 0 auto;
+  height: 304px;
+  background: url('http://image.baobeizm.com/parispb/join-back.jpg');
+  position: relative;
+  #vote-form{
+    #user-name{
+      position: absolute;
+      top: 80px;
+      left: 385px;
+      font-size: 30px;
+      width: 350px;
+    }
+    #user-phone{
+      position: absolute;
+      top: 175px;
+      left: 385px;
+      font-size: 30px;
+      width: 350px;
+    }
+    #submitbtn{
+      position: absolute;
+      top: 120px;
+      left: 750px;
+      font-size: 30px;
+      /*width: 200px;*/
+    }
+  }
+}
+
+//colors
+$color_pompadour_approx: rgba(110, 0, 70, 1);
+$black_100: rgba(0, 0, 0, 1);
+$color_razzmatazz_approx: rgba(222, 17, 89, 1);
+$color_dell_44_approx: rgba(66, 92, 20, 0.44);
+
+.progress {
+  background: $color_pompadour_approx;
+  border: 3px solid $black_100;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 25px;
+  height: 39px;
+}
+.paris-progress-bar {
+  background: $color_razzmatazz_approx;
+}
+.progress-striped .paris-progress-bar {
+  background-color: $color_razzmatazz_approx;
+  background-image: linear-gradient(45deg,$color_dell_44_approx 25%,transparent 25%,transparent 50%,$color_dell_44_approx 50%,$color_dell_44_approx 75%,transparent 75%,transparent);
+  background-size: 40px 40px;
+}
