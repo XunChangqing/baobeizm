@@ -7,11 +7,9 @@ class FirstPriceJoiner < ActiveRecord::Base
   validates :point, presence: true
   validates :name, presence: true
   def rank
-    bigcount = FirstPriceJoiner.where("point > ?", point).count
-    equalcount = FirstPriceJoiner.where("point = ? AND updated_at < ?", point, updated_at).count
-    #@joiners = FirstPriceJoiner.where(forbidden: [false, nil]).order(point: :desc, updated_at: :asc).page(params[:page])
-    #bigcount+equalcount+1
-    #临时处理由于封号导致个人排名和排名榜不一致的情况
-    bigcount+equalcount
+    bigcount = FirstPriceJoiner.where("point > ?", point).where(forbidden: [false, nil]).count
+    equalcount = FirstPriceJoiner.where("point = ? AND updated_at < ?", point, updated_at).where(forbidden: [false, nil]).count
+    #@joiners = FirstPriceJoiner.where(forbidden: [false, nil]).order
+    bigcount+equalcount+1
   end
 end

@@ -111,7 +111,7 @@ class FirstPriceBargainController < ApplicationController
     if Rails.env == "development"
       user = {}
       user['nickname'] = '14t'
-      user['openid'] = 'xcv009j98lj'
+      user['openid'] = 'xvsdf065ys980880'
       user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
       user
     else
