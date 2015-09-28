@@ -5,12 +5,14 @@
     %thead
       %tr
         %td 昵称
+        %td openid
         %td 头像
         %td 时间
     %tbody
       -@voters.each do |voter|
         %tr
           %td= voter.nickname
+          %td= voter.openid
           %td
             %img{src: voter.heading_url, width: '50px', height: '50px'}
             -#=image_tag voter.heading_url

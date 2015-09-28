@@ -5,6 +5,7 @@
     %thead
       %tr
         %td 姓名
+        %td openid
         %td 电话
         %td 微信昵称
         %td 得分
@@ -17,6 +18,7 @@
       -@joiners.each do |joiner|
         %tr
           %td= joiner.name
+          %td= joiner.openid
           %td= joiner.phone_number
           %td= joiner.nickname
           %td= joiner.point
