@@ -3,7 +3,7 @@ SimpleCaptcha.setup do |sc|
   #sc.image_size = '120x40'
 
   # default: 5
-  sc.length = 3
+  #sc.length = 3
 
   # default: simply_blue
   # possible values:
@@ -24,9 +24,9 @@ SimpleCaptcha.setup do |sc|
 
   # default: low
   # possible values: 'low', 'medium', 'high', 'random'
-  sc.distortion = 'low'
+  sc.distortion = 'medium'
 
   # default: medium
   # possible values: 'none', 'low', 'medium', 'high'
-  sc.implode = 'low'
+  #sc.implode = 'high'
 end

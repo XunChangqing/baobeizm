@@ -70,7 +70,9 @@ class FirstPriceBargainController < ApplicationController
     #if @voter.first_price_joiner.forbidden
       #render json: {error: 1}
     #if @voter.save_with_captcha
-    if not simple_captcha_valid? 
+    if DateTime.now > "2015.10.05 24:00:00 +0800"
+      render json: {error: 3}
+    elsif simple_captcha_valid? 
       render json: {error: 2}
     elsif @voter.save
       @voter.first_price_joiner.point = @voter.first_price_joiner.first_price_voter.count * point_per
@@ -111,7 +113,7 @@ class FirstPriceBargainController < ApplicationController
     if Rails.env == "development"
       user = {}
       user['nickname'] = '14t'
-      user['openid'] = 'xvsdf065ys980880'
+      user['openid'] = 'xvsdf00980'
       user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
       user
     else

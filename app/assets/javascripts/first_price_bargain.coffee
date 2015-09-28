@@ -133,6 +133,8 @@ $ ->
                   $('#vote-errmsg').text "砍价失败"
                 else if data['error'] == 2
                   $('#vote-errmsg').text "验证码错误"
+                else if data['error'] == 3
+                  $('#vote-errmsg').text "活动已停止"
                 else if data['point']
                   if data['point'] > 9999
                     p1val = p2val = p3val = p4val = '9'
