@@ -103,7 +103,7 @@ class FirstPriceBargainController < ApplicationController
   end
 
   def index_voters
-    @voters = FirstPriceJoiner.find_by_openid(params[:openid]).first_price_voter
+    @voters = FirstPriceJoiner.find_by_openid(params[:openid]).first_price_voter.order(created_at: :desc)
   end
 
   public
