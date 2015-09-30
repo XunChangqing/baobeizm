@@ -8,6 +8,7 @@
         %td openid
         %td 头像
         %td 时间
+        %td 为yoyou投票
     %tbody
       -@voters.each do |voter|
         %tr
@@ -17,5 +18,11 @@
             %img{src: voter.heading_url, width: '50px', height: '50px'}
             -#=image_tag voter.heading_url
           %td= l voter.created_at
+          -if @yoyo_voters.find_by_openid(voter.openid) == nil
+            %td 
+              =form_for @specific_voter, :url=> {:action=> :vote_someone} do |f|
+                =f.hidden_field_tag :first_price_voter_id, voter.id
+                =f.hidden_field :first_price_joiner_id
+                =f.submit '投票'
 
   -#=paginate @voters

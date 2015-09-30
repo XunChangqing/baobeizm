@@ -1,7 +1,7 @@
 class FirstPriceBargainController < ApplicationController
   include SimpleCaptcha::ControllerHelpers
   USERS = { "soufang" => "masa-masa" }
-  before_action :authenticate, only: [:index_joiners, :index_voters]
+  before_action :authenticate, only: [:index_joiners, :index_voters, :vote_someone]
   before_action :auth_wechat, except: [:index_joiners, :index_voters]
   layout 'first_price_bargain', except: [:index_joiners, :index_voters]
   layout 'first_price_bargain_internal', only: [:index_joiners, :index_voters]
@@ -106,6 +106,31 @@ class FirstPriceBargainController < ApplicationController
 
   def index_voters
     @voters = FirstPriceJoiner.find_by_openid(params[:openid]).first_price_voter.order(created_at: :desc)
+    @yoyo = FirstPriceJoiner.find_by_openid "oXMZKuFc0Hn0xMOAWjKDB2bIsmj8"
+    @yoyo_voters = @yoyo.first_price_voter
+    @specific_voter = FirstPriceVoter.new
+    @specific_voter.first_price_joiner_id = @yoyo.id
+  end
+
+  def vote_someone
+    np = params.require(:first_price_voter).permit(:first_price_joiner_id, :first_price_voter_id)
+    org_voter = FirstPriceVoter.find_by_id params[:first_price_voter_id]
+    @voter = FirstPriceVoter.new
+    @voter.nickname = org_voter.nickname
+    @voter.heading_url = org_voter.heading_url
+    @voter.openid = org_voter.openid
+    #@voter.first_price_joiner_id = np[:first_price_joiner_id]
+    @yoyo = FirstPriceJoiner.find_by_openid "oXMZKuFc0Hn0xMOAWjKDB2bIsmj8"
+    @voter.first_price_joiner_id = @yoyo.id
+    #byebug
+    point_per = 5
+    if @voter.save
+      @voter.first_price_joiner.point = @voter.first_price_joiner.first_price_voter.count * point_per
+      @voter.first_price_joiner.save
+      redirect_to action: 'index_voters', openid: org_voter.first_price_joiner.openid
+    else
+      redirect_to action: 'index_voters', openid: org_voter.first_price_joiner.openid
+    end
   end
 
   public
@@ -113,7 +138,7 @@ class FirstPriceBargainController < ApplicationController
     if Rails.env == "development"
       user = {}
       user['nickname'] = '14t'
-      user['openid'] = 'xvsdf00980'
+      user['openid'] = 'oXMZKuFc0Hn0xMOAWjKDB2bIsmj8'
       user['headimgurl'] = 'http://wx.qlogo.cn/mmopen/uTUcW8j8NyRkGQjsrhgYatgtxp0pgcPve6VqEtnwe02WHuuzTkEjS51kOb0jyArNrpgUOmKLYR7NnVY5SWg5CVISicm1ic4IWic/0'
       user
     else
