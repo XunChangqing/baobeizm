@@ -2,7 +2,7 @@ class FirstPriceBargainController < ApplicationController
   include SimpleCaptcha::ControllerHelpers
   USERS = { "soufang" => "masa-masa" }
   before_action :authenticate, only: [:index_joiners, :index_voters, :vote_someone]
-  before_action :auth_wechat, except: [:index_joiners, :index_voters]
+  before_action :auth_wechat, except: [:index_joiners, :index_voters, :vote_someone]
   layout 'first_price_bargain', except: [:index_joiners, :index_voters]
   layout 'first_price_bargain_internal', only: [:index_joiners, :index_voters]
   
