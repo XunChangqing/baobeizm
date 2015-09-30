@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(:name=> 'Iphone6S报名名单') do |sheet|
+  sheet.add_row ['姓名', '电话', '分数', '时间']
+  @joiners.each do |joiner|
+    sheet.add_row [joiner.name, joiner.phone_number, joiner.point, l(joiner.created_at)]
+  end
+end
