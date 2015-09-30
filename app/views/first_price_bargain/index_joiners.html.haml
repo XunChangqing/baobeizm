@@ -1,6 +1,7 @@
 .container
   -#=link_to '导出', action: 'export'
   -#=link_to '导出', paris_price_bargain_export_path(format: :xlsx)
+  =link_to '导出', first_price_bargain_export_path(format: :xlsx)
   %table.table.table-hover
     %thead
       %tr

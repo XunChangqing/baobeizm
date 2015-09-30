@@ -1,8 +1,8 @@
 class FirstPriceBargainController < ApplicationController
   include SimpleCaptcha::ControllerHelpers
   USERS = { "soufang" => "masa-masa" }
-  before_action :authenticate, only: [:index_joiners, :index_voters, :vote_someone]
-  before_action :auth_wechat, except: [:index_joiners, :index_voters, :vote_someone]
+  before_action :authenticate, only: [:index_joiners, :index_voters, :vote_someone, :export]
+  before_action :auth_wechat, except: [:index_joiners, :index_voters, :vote_someone, :export]
   layout 'first_price_bargain', except: [:index_joiners, :index_voters]
   layout 'first_price_bargain_internal', only: [:index_joiners, :index_voters]
   
@@ -127,10 +127,12 @@ class FirstPriceBargainController < ApplicationController
     if @voter.save
       @voter.first_price_joiner.point = @voter.first_price_joiner.first_price_voter.count * point_per
       @voter.first_price_joiner.save
-      redirect_to action: 'index_voters', openid: org_voter.first_price_joiner.openid
-    else
-      redirect_to action: 'index_voters', openid: org_voter.first_price_joiner.openid
     end
+  end
+
+  def export
+    @joiners = FirstPriceJoiner.where(forbidden: [false, nil]).order(point: :desc, updated_at: :asc)
+    render xlsx: 'export', :filename=>"报名名单"
   end
 
   public
