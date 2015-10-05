@@ -124,7 +124,10 @@ class FirstPriceBargainController < ApplicationController
     @voter.first_price_joiner_id = @yoyo.id
     #byebug
     point_per = 5
-    if @voter.save
+    @timeout = false
+    if DateTime.now > "2015.10.05 24:00:00 +0800"
+      @timeout = true
+    elsif @voter.save
       @voter.first_price_joiner.point = @voter.first_price_joiner.first_price_voter.count * point_per
       @voter.first_price_joiner.save
     end
